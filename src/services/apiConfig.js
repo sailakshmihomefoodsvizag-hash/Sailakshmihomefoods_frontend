@@ -15,8 +15,9 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
  * @returns {Promise<any>} The response data
  */
 export const apiRequest = async (endpoint, options = {}) => {
-  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  const url = `${API_BASE_URL}${path}`;
+  // Remove leading slash to avoid double slashes
+  const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
+  const url = `${API_BASE_URL}/${cleanEndpoint}`;
 
   const config = {
     method: options.method || 'GET',
