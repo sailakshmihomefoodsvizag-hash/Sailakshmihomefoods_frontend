@@ -7,7 +7,7 @@ import { productAPI } from '../services/api.js';
 import { useCart } from './CartContext';
 import { useAuth } from './AuthContext';
 import { useDebouncedValue } from '../hooks/useDebouncedValue';
-import logoImage from '../assets/images/samskruthi_pfp.jpg';
+import logoImage from '../assets/images/sailakshmi.webp';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -165,7 +165,7 @@ const Navbar = () => {
       className="sticky top-0 left-0 w-full z-50 bg-white shadow-md transition-all duration-300"
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between min-h-20 sm:min-h-20 lg:min-h-24">
           
           {/* Mobile: Left - Hamburger Menu */}
           <button
@@ -180,11 +180,11 @@ const Navbar = () => {
           </button>
 
           {/* Mobile: Center - Logo | Desktop: Left - Logo (stretched wider) */}
-          <Link to="/" className="flex items-center flex-shrink-0 lg:flex-grow-0">
+          <Link to="/" className="flex items-center justify-center flex-shrink-0 lg:flex-grow-0 px-2">
             <img
               src={logoImage}
-              alt="Samskruthi Foods"
-              className="w-14 h-10 sm:w-16 sm:h-12 lg:w-20 lg:h-14 object-cover rounded-lg"
+              alt="Sai Lakshmi Home Foods"
+              className="w-14 h-14 sm:w-16 sm:h-16 lg:w-24 lg:h-20 object-contain rounded-lg"
             />
           </Link>
 
@@ -392,7 +392,7 @@ const Navbar = () => {
             }`}
           >
             {/* Sidebar Header */}
-            <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 min-h-16">
               <Link 
                 to="/" 
                 onClick={() => setIsMenuOpen(false)}
@@ -400,8 +400,8 @@ const Navbar = () => {
               >
                 <img
                   src={logoImage}
-                  alt="Samskruthi Foods"
-                  className="w-10 h-8 object-cover rounded-lg"
+                  alt="Sai Lakshmi Home Foods"
+                  className="w-12 h-12 object-contain rounded-lg"
                 />
               </Link>
               <button

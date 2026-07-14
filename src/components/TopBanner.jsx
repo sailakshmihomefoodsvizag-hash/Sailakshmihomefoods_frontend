@@ -1,5 +1,5 @@
 const TopBanner = () => {
-  const whatsappUrl = 'https://wa.me/918500677977';
+  const whatsappUrl = 'https://wa.me/919966539144';
 
   return (
     <a

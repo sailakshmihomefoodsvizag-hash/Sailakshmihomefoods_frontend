@@ -190,7 +190,7 @@ export const CheckoutProvider = ({ children }) => {
         key: RAZORPAY_KEY_ID,
         amount: data.order.amount,
         currency: data.order.currency,
-        name: 'Samskruthi Foods',
+        name: 'Sai Lakshmi Foods',
         description: `Order #${data.order.orderId}`,
         order_id: data.order.id,
         handler: async function(response) {

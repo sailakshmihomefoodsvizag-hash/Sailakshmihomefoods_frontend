@@ -1,4 +1,4 @@
-// Firebase configuration for Samskruthi Foods
+// Firebase configuration for Sai Lakshmi Home Foods
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 

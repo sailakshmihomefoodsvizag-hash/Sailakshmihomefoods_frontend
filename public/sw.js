@@ -2,7 +2,7 @@
 // This service worker implements aggressive caching strategies for performance
 
 const CACHE_VERSION = 'v1';
-const CACHE_NAME = `samskruthi-cache-${CACHE_VERSION}`;
+const CACHE_NAME = `sailakshmi-cache-${CACHE_VERSION}`;
 
 // Assets to cache immediately on install
 const STATIC_ASSETS = [
@@ -11,7 +11,7 @@ const STATIC_ASSETS = [
 ];
 
 // Image cache name
-const IMAGE_CACHE = `samskruthi-images-${CACHE_VERSION}`;
+const IMAGE_CACHE = `sailakshmi-images-${CACHE_VERSION}`;
 
 // Cache duration (7 days for images)
 const IMAGE_CACHE_DURATION = 7 * 24 * 60 * 60 * 1000;
@@ -33,7 +33,7 @@ self.addEventListener('activate', (event) => {
       return Promise.all(
         cacheNames
           .filter((name) => {
-            return name.startsWith('samskruthi-') && 
+            return name.startsWith('sailakshmi-') && 
                    name !== CACHE_NAME && 
                    name !== IMAGE_CACHE;
           })
@@ -139,7 +139,7 @@ self.addEventListener('message', (event) => {
       caches.keys().then((cacheNames) => {
         return Promise.all(
           cacheNames
-            .filter((name) => name.startsWith('samskruthi-'))
+            .filter((name) => name.startsWith('sailakshmi-'))
             .map((name) => caches.delete(name))
         );
       })

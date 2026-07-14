@@ -54,7 +54,7 @@ const AdminLogin = () => {
             Admin Login
           </h1>
           <p className="text-white/90 mt-2 font-montserrat text-sm drop-shadow-md">
-            Samskruthi Foods Management
+            Sai Lakshmi Foods Management
           </p>
         </div>
 

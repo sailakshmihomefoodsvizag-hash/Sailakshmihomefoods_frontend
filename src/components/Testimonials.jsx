@@ -29,7 +29,7 @@ const testimonials = [
   {
     id: 5,
     name: 'Kavya Iyer',
-    review: 'Fantastic products! The podis are aromatic and flavorful. Perfect for our daily breakfast. Thank you Samskruthi!',
+    review: 'Fantastic products! The podis are aromatic and flavorful. Perfect for our daily breakfast. Thank you Sai Lakshmi!',
     rating: 5,
   },
 ];

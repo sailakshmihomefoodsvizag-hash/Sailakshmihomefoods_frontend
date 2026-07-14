@@ -1,887 +1,1776 @@
 <!-- 
-  Samskruthi Home Foods
+
+  Sai Lakshmi Home Foods
+
   Page: Refund and Return Policy
+
   Version: 1.0
-  © 2025 Samskruthi Home Foods. All Rights Reserved.
+
+  © 2025 Sai Lakshmi Home Foods. All Rights Reserved.
+
 -->
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Refund & Return Policy | Samskruthi Home Foods</title>
-  <meta name="description" content="Refund and Return Policy for Samskruthi Home Foods - No return, no refund policy for perishable home-made food products">
+
+  <title>Refund & Return Policy | Sai Lakshmi Home Foods</title>
+
+  <meta name="description" content="Refund and Return Policy for Sai Lakshmi Home Foods - No return, no refund policy for perishable home-made food products">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Tiro+Telugu:ital@0;1&display=swap" rel="stylesheet">
+
   <style>
+
     :root {
+
       --primary: #C0533A;
+
       --secondary: #D4A017;
+
       --background: #FDF6EC;
+
       --card-bg: #FFFAF3;
+
       --text: #3B1F0E;
+
       --accent: #6B7C3A;
+
       --white: #FFFFFF;
+
       --border-light: #E8DDD0;
+
       --danger: #B91C1C;
+
     }
+
+
 
     * {
+
       margin: 0;
+
       padding: 0;
+
       box-sizing: border-box;
+
     }
+
+
 
     body {
+
       font-family: 'Lora', serif;
+
       background-color: var(--background);
+
       color: var(--text);
+
       line-height: 1.7;
+
       font-size: 16px;
+
     }
+
+
 
     .telugu {
+
       font-family: 'Tiro Telugu', serif;
+
     }
+
+
 
     /* Disclaimer Banner */
+
     .disclaimer-banner {
+
       background: linear-gradient(135deg, var(--primary) 0%, #A04430 100%);
+
       color: var(--white);
+
       padding: 15px 20px;
+
       text-align: center;
+
       font-size: 14px;
+
       font-weight: 500;
+
     }
+
+
 
     .disclaimer-banner p {
+
       max-width: 1000px;
+
       margin: 0 auto;
+
     }
+
+
 
     /* Header */
+
     .header {
+
       background: var(--card-bg);
+
       padding: 30px 20px;
+
       text-align: center;
+
       border-bottom: 4px solid var(--primary);
+
       box-shadow: 0 2px 10px rgba(59, 31, 14, 0.1);
+
     }
+
+
 
     .logo {
+
       width: 100px;
+
       height: 100px;
+
       border-radius: 50%;
+
       object-fit: cover;
+
       box-shadow: 0 4px 15px rgba(192, 83, 58, 0.3);
+
       margin-bottom: 15px;
+
       border: 3px solid var(--secondary);
+
     }
+
+
 
     .header h1 {
+
       font-family: 'Tiro Telugu', serif;
+
       font-size: 2.2rem;
+
       color: var(--primary);
+
       margin-bottom: 5px;
+
     }
+
+
 
     .tagline {
+
       font-size: 1rem;
+
       color: var(--accent);
+
       margin-bottom: 15px;
+
     }
+
+
 
     .divider {
+
       color: var(--secondary);
+
       font-size: 1.2rem;
+
       letter-spacing: 8px;
+
       margin-bottom: 15px;
+
     }
+
+
 
     .back-link {
+
       display: inline-block;
+
       color: var(--primary);
+
       text-decoration: none;
+
       font-weight: 500;
+
       transition: color 0.3s;
+
     }
+
+
 
     .back-link:hover {
+
       color: var(--secondary);
+
     }
+
+
 
     /* Main Content */
+
     .main {
+
       max-width: 900px;
+
       margin: 0 auto;
+
       padding: 30px 20px;
+
     }
+
+
 
     .page-title {
+
       font-family: 'Tiro Telugu', serif;
+
       font-size: 2rem;
+
       color: var(--primary);
+
       text-align: center;
+
       margin-bottom: 10px;
+
     }
+
+
 
     .page-subtitle {
+
       text-align: center;
+
       color: var(--accent);
+
       margin-bottom: 10px;
+
       font-size: 1.1rem;
+
     }
+
+
 
     .last-updated {
+
       text-align: center;
+
       font-size: 0.9rem;
+
       color: #888;
+
       margin-bottom: 30px;
+
     }
+
+
 
     /* Policy Summary Banner */
+
     .policy-summary {
+
       background: linear-gradient(135deg, var(--primary) 0%, #A04430 100%);
+
       color: var(--white);
+
       padding: 25px;
+
       border-radius: 12px;
+
       text-align: center;
+
       margin-bottom: 30px;
+
     }
+
+
 
     .policy-summary h2 {
+
       font-family: 'Tiro Telugu', serif;
+
       font-size: 1.5rem;
+
       margin-bottom: 15px;
+
     }
+
+
 
     .policy-summary .badges {
+
       display: flex;
+
       justify-content: center;
+
       gap: 20px;
+
       flex-wrap: wrap;
+
     }
+
+
 
     .policy-summary .badge {
+
       background: rgba(255, 255, 255, 0.2);
+
       padding: 10px 20px;
+
       border-radius: 50px;
+
       font-weight: 600;
+
       font-size: 1rem;
+
     }
+
+
 
     /* Section Cards */
+
     .section {
+
       background: var(--card-bg);
+
       border-radius: 12px;
+
       padding: 25px;
+
       margin-bottom: 25px;
+
       border-top: 4px solid var(--primary);
+
       box-shadow: 0 3px 15px rgba(59, 31, 14, 0.08);
+
     }
+
+
 
     .section h2 {
+
       font-family: 'Tiro Telugu', serif;
+
       font-size: 1.4rem;
+
       color: var(--primary);
+
       margin-bottom: 15px;
+
       padding-bottom: 10px;
+
       border-bottom: 2px dashed var(--border-light);
+
     }
+
+
 
     .section h3 {
+
       font-size: 1.1rem;
+
       color: var(--accent);
+
       margin: 15px 0 10px 0;
+
     }
+
+
 
     .section p {
+
       margin-bottom: 12px;
+
       text-align: justify;
+
     }
+
+
 
     .section ul, .section ol {
+
       margin: 10px 0 15px 25px;
+
     }
+
+
 
     .section li {
+
       margin-bottom: 8px;
+
     }
+
+
 
     .telugu-summary {
+
       background: linear-gradient(135deg, #FFF8F0 0%, #FDF6EC 100%);
+
       border-left: 4px solid var(--secondary);
+
       padding: 15px;
+
       margin-top: 20px;
+
       border-radius: 0 8px 8px 0;
+
     }
+
+
 
     .telugu-summary h4 {
+
       font-family: 'Tiro Telugu', serif;
+
       color: var(--secondary);
+
       margin-bottom: 8px;
+
       font-size: 1rem;
+
     }
+
+
 
     .telugu-summary p {
+
       font-family: 'Tiro Telugu', serif;
+
       font-size: 0.95rem;
+
       line-height: 1.8;
+
       text-align: left;
+
     }
+
+
 
     /* Table Styling */
+
     .shelf-table {
+
       width: 100%;
+
       border-collapse: collapse;
+
       margin: 15px 0;
+
       font-size: 0.95rem;
+
     }
+
+
 
     .shelf-table th {
+
       background: var(--primary);
+
       color: var(--white);
+
       padding: 12px 10px;
+
       text-align: left;
+
       font-weight: 600;
+
     }
+
+
 
     .shelf-table td {
+
       padding: 12px 10px;
+
       border-bottom: 1px solid var(--border-light);
+
       vertical-align: top;
+
     }
+
+
 
     .shelf-table tr:nth-child(even) {
+
       background: rgba(212, 160, 23, 0.08);
+
     }
+
+
 
     .shelf-table tr:hover {
+
       background: rgba(192, 83, 58, 0.08);
+
     }
+
+
 
     /* Highlight Box */
+
     .highlight-box {
+
       background: linear-gradient(135deg, rgba(192, 83, 58, 0.1) 0%, rgba(212, 160, 23, 0.1) 100%);
+
       border: 1px solid var(--primary);
+
       border-radius: 8px;
+
       padding: 15px;
+
       margin: 15px 0;
+
     }
+
+
 
     .highlight-box.success {
+
       background: linear-gradient(135deg, rgba(107, 124, 58, 0.15) 0%, rgba(107, 124, 58, 0.08) 100%);
+
       border-color: var(--accent);
+
     }
+
+
 
     .highlight-box.warning {
+
       background: rgba(192, 83, 58, 0.12);
+
       border-color: var(--primary);
+
     }
+
+
 
     .highlight-box.danger {
+
       background: rgba(185, 28, 28, 0.1);
+
       border-color: var(--danger);
+
     }
+
+
 
     .highlight-box.info {
+
       background: linear-gradient(135deg, rgba(212, 160, 23, 0.15) 0%, rgba(212, 160, 23, 0.08) 100%);
+
       border-color: var(--secondary);
+
     }
+
+
 
     .highlight-box strong {
+
       color: var(--primary);
+
     }
+
+
 
     .highlight-box.danger strong {
+
       color: var(--danger);
+
     }
+
+
 
     /* Exception Cards */
+
     .exception-cards {
+
       display: grid;
+
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
       gap: 20px;
+
       margin: 20px 0;
+
     }
+
+
 
     .exception-card {
+
       background: var(--white);
+
       border: 2px solid var(--accent);
+
       border-radius: 10px;
+
       padding: 20px;
+
     }
+
+
 
     .exception-card h4 {
+
       color: var(--accent);
+
       margin-bottom: 10px;
+
       font-size: 1.1rem;
+
     }
+
+
 
     .exception-card p {
+
       font-size: 0.95rem;
+
       margin-bottom: 10px;
+
     }
+
+
 
     .exception-card ul {
+
       margin: 10px 0 0 20px;
+
       font-size: 0.9rem;
+
     }
+
+
 
     /* Not Covered List */
+
     .not-covered {
+
       background: rgba(185, 28, 28, 0.05);
+
       border: 1px solid rgba(185, 28, 28, 0.2);
+
       border-radius: 8px;
+
       padding: 20px;
+
       margin: 15px 0;
+
     }
+
+
 
     .not-covered h4 {
+
       color: var(--danger);
+
       margin-bottom: 12px;
+
     }
+
+
 
     .not-covered ul {
+
       margin-left: 20px;
+
     }
+
+
 
     .not-covered li {
+
       position: relative;
+
       padding-left: 25px;
+
       margin-bottom: 8px;
+
     }
+
+
 
     .not-covered li:before {
+
       content: '✗';
+
       position: absolute;
+
       left: 0;
+
       color: var(--danger);
+
       font-weight: bold;
+
     }
+
+
 
     /* Footer */
+
     .footer {
+
       background: var(--text);
+
       color: var(--background);
+
       padding: 30px 20px;
+
       text-align: center;
+
       margin-top: 40px;
+
     }
+
+
 
     .footer p {
+
       margin-bottom: 8px;
+
       font-size: 0.9rem;
+
     }
+
+
 
     .footer .copyright {
+
       margin-top: 15px;
+
       padding-top: 15px;
+
       border-top: 1px solid rgba(253, 246, 236, 0.2);
+
       font-size: 0.85rem;
+
     }
+
+
 
     .footer .tagline-footer {
+
       color: var(--secondary);
+
       font-style: italic;
+
     }
+
+
 
     /* Back to Top Button */
+
     .back-to-top {
+
       position: fixed;
+
       bottom: 30px;
+
       right: 30px;
+
       width: 50px;
+
       height: 50px;
+
       background: linear-gradient(135deg, var(--primary) 0%, #A04430 100%);
+
       color: var(--white);
+
       border: none;
+
       border-radius: 50%;
+
       cursor: pointer;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       font-size: 24px;
+
       box-shadow: 0 4px 15px rgba(192, 83, 58, 0.4);
+
       opacity: 0;
+
       visibility: hidden;
+
       transition: all 0.3s ease;
+
       z-index: 1000;
+
     }
+
+
 
     .back-to-top.show {
+
       opacity: 1;
+
       visibility: visible;
+
     }
+
+
 
     .back-to-top:hover {
+
       background: linear-gradient(135deg, #A04430 0%, var(--primary) 100%);
+
       transform: translateY(-3px);
+
       box-shadow: 0 6px 20px rgba(192, 83, 58, 0.5);
+
     }
+
+
 
     .back-to-top:active {
+
       transform: translateY(-1px);
+
     }
+
+
 
     /* Responsive */
+
     @media (max-width: 768px) {
+
       .header h1 {
+
         font-size: 1.8rem;
+
       }
+
+
 
       .page-title {
+
         font-size: 1.6rem;
+
       }
+
+
 
       .section {
+
         padding: 20px 15px;
+
       }
+
+
 
       .section h2 {
+
         font-size: 1.2rem;
+
       }
+
+
 
       .policy-summary .badges {
+
         flex-direction: column;
+
         gap: 10px;
+
       }
 
+
+
       .shelf-table {
+
         font-size: 0.85rem;
+
       }
+
+
 
       .shelf-table th, .shelf-table td {
+
         padding: 8px 6px;
+
       }
+
     }
+
+
 
     @media (max-width: 480px) {
+
       .header h1 {
+
         font-size: 1.5rem;
+
       }
+
+
 
       .logo {
+
         width: 80px;
+
         height: 80px;
+
       }
+
+
 
       .shelf-table {
+
         display: block;
+
         overflow-x: auto;
+
       }
+
+
 
       .exception-cards {
+
         grid-template-columns: 1fr;
+
       }
+
+
 
       .back-to-top {
+
         bottom: 20px;
+
         right: 20px;
+
         width: 45px;
+
         height: 45px;
+
         font-size: 20px;
+
       }
+
     }
+
   </style>
+
 </head>
+
 <body>
+
   <!-- Back to Top Button -->
+
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
+
     ↑
+
   </button>
 
+
+
   <script>
+
     // Back to Top Button Functionality
+
     const backToTopButton = document.getElementById('backToTop');
 
+
+
     window.addEventListener('scroll', function() {
+
       if (window.pageYOffset > 300) {
+
         backToTopButton.classList.add('show');
+
       } else {
+
         backToTopButton.classList.remove('show');
+
       }
+
     });
+
+
 
     backToTopButton.addEventListener('click', function() {
+
       window.scrollTo({
+
         top: 0,
+
         behavior: 'smooth'
+
       });
+
     });
+
   </script>
 
+
+
   <!-- Disclaimer Banner -->
+
   <div class="disclaimer-banner">
+
     <p>⚠️ By using this website and placing an order, you agree to all the terms listed on this page. Please read carefully before purchasing. | ఈ వెబ్‌సైట్‌ను ఉపయోగించడం ద్వారా, మీరు ఈ నిబంధనలన్నింటికీ అంగీకరిస్తున్నారు.</p>
+
   </div>
 
+
+
   <!-- Header -->
+
   <header class="header">
-    <img src="/samskruthi_pfp.jpg" alt="Samskruthi Home Foods Logo" class="logo">
-    <h1>Samskruthi Home Foods</h1>
+
+    <img src="/sailakshmi.webp" alt="Sai Lakshmi Home Foods Logo" class="logo">
+
+    <h1>Sai Lakshmi Home Foods</h1>
+
     <p class="tagline">Authentic Home-Made Taste | <span class="telugu">నిజమైన ఇంటి రుచి</span></p>
+
     <p class="divider">✦ ✦ ✦</p>
+
     <a href="/" class="back-link">← Back to Home</a>
+
   </header>
 
+
+
   <!-- Main Content -->
+
   <main class="main">
+
     <h1 class="page-title">Refund & Return Policy</h1>
+
     <p class="page-subtitle telugu">వాపసు మరియు రీఫండ్ విధానం</p>
+
     <p class="last-updated">Last Updated: January 2025</p>
 
+
+
     <!-- Policy Summary Banner -->
+
     <div class="policy-summary">
+
       <h2>⚠️ Important: Strict Policy for Perishable Food Items</h2>
+
       <div class="badges">
+
         <span class="badge">❌ NO RETURNS</span>
+
         <span class="badge">❌ NO REFUNDS</span>
+
         <span class="badge">❌ NO CANCELLATIONS (After Payment)</span>
+
       </div>
+
     </div>
+
+
 
     <!-- Section 1: Introduction -->
+
     <section class="section">
+
       <h2>1. Introduction</h2>
-      <p>This Refund and Return Policy explains our policies regarding returns, refunds, and cancellations for products purchased from Samskruthi Home Foods. Please read this policy carefully <strong>BEFORE</strong> placing your order.</p>
+
+      <p>This Refund and Return Policy explains our policies regarding returns, refunds, and cancellations for products purchased from Sai Lakshmi Home Foods. Please read this policy carefully <strong>BEFORE</strong> placing your order.</p>
+
       
+
       <div class="highlight-box danger">
-        <p><strong>⚠️ CRITICAL NOTICE:</strong> Samskruthi Home Foods operates a <strong>STRICT NO RETURN and NO REFUND policy</strong>. All sales are FINAL once payment is successfully processed. By completing a purchase, you acknowledge and agree to this policy in its entirety.</p>
+
+        <p><strong>⚠️ CRITICAL NOTICE:</strong> Sai Lakshmi Home Foods operates a <strong>STRICT NO RETURN and NO REFUND policy</strong>. All sales are FINAL once payment is successfully processed. By completing a purchase, you acknowledge and agree to this policy in its entirety.</p>
+
       </div>
+
       
+
       <p>This policy exists to protect food safety and hygiene standards as mandated by FSSAI (Food Safety and Standards Authority of India). As our products are perishable food items, they cannot be returned or resold once delivered.</p>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
-        <p>సమృతి హోమ్ ఫుడ్స్ ఖచ్చితమైన "రిటర్న్ లేదు, రీఫండ్ లేదు" విధానం అనుసరిస్తుంది. చెల్లింపు విజయవంతమైన తర్వాత అన్ని అమ్మకాలు ఫైనల్. మా ఉత్పత్తులు పాడయ్యే ఆహార పదార్థాలు కాబట్టి, FSSAI నిబంధనల ప్రకారం ఇవి తిరిగి ఇవ్వడం లేదా మళ్ళీ అమ్మడం సాధ్యం కాదు.</p>
+
+        <p>సాయి లక్ష్మి హోమ్ ఫుడ్స్ ఖచ్చితమైన "రిటర్న్ లేదు, రీఫండ్ లేదు" విధానం అనుసరిస్తుంది. చెల్లింపు విజయవంతమైన తర్వాత అన్ని అమ్మకాలు ఫైనల్. మా ఉత్పత్తులు పాడయ్యే ఆహార పదార్థాలు కాబట్టి, FSSAI నిబంధనల ప్రకారం ఇవి తిరిగి ఇవ్వడం లేదా మళ్ళీ అమ్మడం సాధ్యం కాదు.</p>
+
       </div>
+
     </section>
+
+
 
     <!-- AI Images Disclaimer -->
+
     <div class="highlight-box info">
+
       <h3>🤖 Important Disclaimer About Product Images</h3>
-      <p><strong>Please Note:</strong> The product images displayed on our website are <strong>AI-generated representations</strong> and are <strong>not photographs of the actual products</strong>. These images are created using artificial intelligence for illustration purposes only. The actual appearance, color, and packaging of our products may differ from the images shown. For accurate product details and current photos of our actual homemade goods, please contact us directly at <strong>+91 8500677977</strong> or via email at <strong>manasamskruthihomefoods@gmail.com</strong>.</p>
+
+      <p><strong>Please Note:</strong> The product images displayed on our website are <strong>AI-generated representations</strong> and are <strong>not photographs of the actual products</strong>. These images are created using artificial intelligence for illustration purposes only. The actual appearance, color, and packaging of our products may differ from the images shown. For accurate product details and current photos of our actual homemade goods, please contact us directly at <strong>+91 9966539144</strong> or via email at <strong>manaSai Lakshmihomefoods@gmail.com</strong>.</p>
+
       <p><strong>Our commitment:</strong> What you receive will be authentic, high-quality homemade products prepared with the same care shown in our marketing materials.</p>
+
     </div>
 
+
+
     <!-- Section 2: No Return Policy -->
+
     <section class="section">
+
       <h2>2. No Return Policy</h2>
+
       <div class="highlight-box warning">
+
         <p><strong>🚫 ZERO RETURNS ACCEPTED</strong> on any product, under any circumstance, once the product has been delivered to you.</p>
+
       </div>
+
       
+
       <h3>Why We Cannot Accept Returns:</h3>
+
       <ul>
+
         <li><strong>Perishable Nature:</strong> All our products (pickles, snacks, and sweets) are perishable food items with limited shelf life.</li>
+
         <li><strong>Food Safety Laws:</strong> Under FSSAI regulations, once food products leave the manufacturer's control and are delivered to a customer, they cannot be returned and resold due to food safety and hygiene concerns.</li>
+
         <li><strong>Quality Assurance:</strong> We cannot verify how the product was stored, handled, or maintained after delivery. Accepting returns would compromise the quality standards we promise to all our customers.</li>
+
         <li><strong>Health & Hygiene:</strong> Returned food items pose potential health risks and cannot be given to other customers.</li>
+
       </ul>
+
       
+
       <p>By placing an order, you acknowledge that you understand and accept this no-return policy. Please be absolutely certain about your purchase before completing payment.</p>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
+
         <p>మా ఉత్పత్తులు పాడయ్యే ఆహార పదార్థాలు కాబట్టి, డెలివరీ అయిన తర్వాత ఏ పరిస్థితిలోనూ తిరిగి ఇవ్వడం అంగీకరించబడదు. FSSAI నిబంధనల ప్రకారం, కస్టమర్‌కు డెలివరీ అయిన ఆహారం తిరిగి తీసుకొని మళ్ళీ అమ్మడం సాధ్యం కాదు. ఆర్డర్ చేయడానికి ముందు మీ నిర్ణయం గురించి ఖచ్చితంగా ఉండండి.</p>
+
       </div>
+
     </section>
+
+
 
     <!-- Section 3: No Refund Policy -->
+
     <section class="section">
+
       <h2>3. No Refund Policy</h2>
+
       <div class="highlight-box warning">
+
         <p><strong>💰 ALL SALES ARE FINAL</strong> once payment is successfully processed through Razorpay. No refunds will be issued under any circumstance except the limited exceptions mentioned in Section 5.</p>
+
       </div>
+
       
+
       <h3>Situations Where NO Refund Will Be Issued:</h3>
+
       <ul>
+
         <li><strong>Change of Mind:</strong> You decided you don't want the product after ordering</li>
+
         <li><strong>Taste Preference:</strong> The taste doesn't match your expectation or preference</li>
+
         <li><strong>Spice Level:</strong> You find the product too spicy or not spicy enough</li>
+
         <li><strong>Texture/Consistency:</strong> Natural variations in home-made products</li>
+
         <li><strong>Color Variation:</strong> Slight differences in color between batches (natural)</li>
+
         <li><strong>Delivery Delay:</strong> Delays caused by courier partners</li>
+
         <li><strong>Partial Consumption:</strong> Product partially consumed before complaint</li>
+
         <li><strong>Improper Storage:</strong> Product damaged due to customer's improper storage</li>
+
         <li><strong>Missed Delivery:</strong> You were unavailable to receive delivery</li>
+
         <li><strong>Ordered Wrong Product:</strong> You mistakenly ordered a different product</li>
+
         <li><strong>Duplicate Order:</strong> You accidentally placed the same order twice</li>
+
       </ul>
+
       
+
       <p><strong>Payment Gateway Note:</strong> All payments are processed by Razorpay. Payment gateway fees are non-recoverable and cannot be refunded under any circumstances.</p>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
+
         <p>చెల్లింపు విజయవంతమైన తర్వాత రీఫండ్ ఇవ్వబడదు. మనసు మార్చుకోవడం, రుచి ఇష్టం లేకపోవడం, మసాలా ఎక్కువ/తక్కువ, రంగు తేడా, డెలివరీ ఆలస్యం, కొంత భాగం తిన్న తర్వాత ఫిర్యాదు, లేదా సరిగ్గా నిల్వ చేయకపోవడం వంటి వాటికి రీఫండ్ ఇవ్వబడదు.</p>
+
       </div>
+
     </section>
+
+
 
     <!-- Section 4: Order Cancellation Policy -->
+
     <section class="section">
+
       <h2>4. Order Cancellation Policy</h2>
+
       
+
       <h3>Before Payment:</h3>
+
       <p>You may cancel your order at any time <strong>BEFORE</strong> completing payment. Simply close the checkout page or do not proceed with payment.</p>
+
       
+
       <h3>After Payment:</h3>
+
       <div class="highlight-box danger">
+
         <p><strong>⚠️ NO CANCELLATION ALLOWED:</strong> Once your payment is successfully processed through Razorpay, your order CANNOT be cancelled, modified, or reversed under any circumstance.</p>
+
       </div>
+
       
+
       <p><strong>Why No Post-Payment Cancellation?</strong></p>
+
       <ul>
+
         <li>Orders go into preparation immediately after payment confirmation</li>
+
         <li>Ingredients are allocated and products may already be packed</li>
+
         <li>Perishable items prepared specifically for your order cannot be resold</li>
+
         <li>Payment gateway fees are non-refundable</li>
+
       </ul>
+
       
+
       <div class="highlight-box info">
+
         <p><strong>💡 Important Advice:</strong> Please review your cart, delivery address, and order summary carefully. Take a screenshot of your order before payment. Do NOT place an order unless you are 100% sure about your purchase.</p>
+
       </div>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
+
         <p>చెల్లింపుకు ముందు మీరు ఆర్డర్ రద్దు చేయవచ్చు. కానీ చెల్లింపు విజయవంతమైన తర్వాత, ఆర్డర్ రద్దు చేయడం, మార్చడం లేదా వెనక్కి తీసుకోవడం సాధ్యం కాదు. దయచేసి ఆర్డర్ చేయడానికి ముందు మీ కార్ట్ మరియు చిరునామా జాగ్రత్తగా సమీక్షించండి.</p>
+
       </div>
+
     </section>
+
+
 
     <!-- Section 5: Exceptions -->
+
     <section class="section">
+
       <h2>5. Exceptions (Limited Circumstances Only)</h2>
+
       <p>We understand that genuine issues can occur. The following are the <strong>ONLY TWO</strong> exceptions where we may consider providing a resolution:</p>
+
       
+
       <div class="exception-cards">
+
         <div class="exception-card">
+
           <h4>Exception A: Wrong Product Delivered</h4>
+
           <p>If you receive a completely different product than what you ordered (e.g., ordered Chicken Pickle but received Mango Pickle).</p>
+
           <ul>
+
             <li>Must contact within <strong>24 hours</strong> of delivery</li>
+
             <li>Share clear photos of product received</li>
+
             <li>Share photo of packaging/label</li>
+
             <li>Product must be <strong>unopened and unused</strong></li>
+
           </ul>
+
         </div>
+
         <div class="exception-card">
+
           <h4>Exception B: Severely Damaged in Transit</h4>
+
           <p>If the package arrived severely damaged during shipping making the product completely unusable (e.g., bottle completely shattered, contents spilled).</p>
+
           <ul>
+
             <li>Must contact within <strong>24 hours</strong> of delivery</li>
+
             <li>Share clear photos/videos of damaged package</li>
+
             <li>Share photos of product condition</li>
+
             <li>Do NOT throw away the damaged item</li>
+
           </ul>
+
         </div>
+
       </div>
+
       
+
       <h3>How to Report an Exception:</h3>
+
       <ol>
-        <li><strong>Call immediately:</strong> 085006 77977 (within 24 hours of delivery)</li>
-        <li><strong>Share evidence:</strong> Clear photos and/or videos via email to manasamskruthihomefoods@gmail.com</li>
+
+        <li><strong>Call immediately:</strong> 099665 39144 (within 24 hours of delivery)</li>
+
+        <li><strong>Share evidence:</strong> Clear photos and/or videos via email to manaSai Lakshmihomefoods@gmail.com</li>
+
         <li><strong>Keep the product:</strong> Do not consume, throw away, or return the product without our instruction</li>
+
         <li><strong>Wait for verification:</strong> Our team will review the evidence</li>
+
       </ol>
+
       
+
       <div class="highlight-box warning">
+
         <p><strong>⚠️ Important Notes on Exceptions:</strong></p>
+
         <ul>
-          <li>Resolution is at the <strong>sole discretion</strong> of Samskruthi Home Foods</li>
+
+          <li>Resolution is at the <strong>sole discretion</strong> of Sai Lakshmi Home Foods</li>
+
           <li>Resolution may be in the form of <strong>replacement</strong> or <strong>store credit</strong></li>
+
           <li><strong>Cash refunds are NOT provided</strong> even for exceptions</li>
+
           <li>Claims made after 24 hours will NOT be entertained</li>
+
           <li>Claims without photo/video evidence will NOT be processed</li>
+
         </ul>
+
       </div>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
-        <p>రెండు మినహాయింపులు మాత్రమే: (1) తప్పు ఉత్పత్తి డెలివరీ, (2) రవాణాలో తీవ్రంగా దెబ్బతిన్న ప్యాకేజీ. డెలివరీ 24 గంటల్లోపు 085006 77977 కు కాల్ చేసి, ఫోటోలు/వీడియోలు manasamskruthihomefoods@gmail.com కు ఇమెయిల్ చేయండి. పరిష్కారం మా నిర్ణయం ప్రకారం - రీప్లేస్‌మెంట్ లేదా స్టోర్ క్రెడిట్ మాత్రమే, నగదు రీఫండ్ కాదు.</p>
+
+        <p>రెండు మినహాయింపులు మాత్రమే: (1) తప్పు ఉత్పత్తి డెలివరీ, (2) రవాణాలో తీవ్రంగా దెబ్బతిన్న ప్యాకేజీ. డెలివరీ 24 గంటల్లోపు 099665 39144 కు కాల్ చేసి, ఫోటోలు/వీడియోలు manaSai Lakshmihomefoods@gmail.com కు ఇమెయిల్ చేయండి. పరిష్కారం మా నిర్ణయం ప్రకారం - రీప్లేస్‌మెంట్ లేదా స్టోర్ క్రెడిట్ మాత్రమే, నగదు రీఫండ్ కాదు.</p>
+
       </div>
+
     </section>
+
+
 
     <!-- Section 6: What is NOT Covered -->
+
     <section class="section">
+
       <h2>6. What is NOT Covered</h2>
+
       <p>To be completely clear, the following situations are <strong>NOT covered</strong> under any return, refund, or replacement policy:</p>
+
       
+
       <div class="not-covered">
+
         <h4>❌ These Complaints Will NOT Be Entertained:</h4>
+
         <ul>
+
           <li>Taste or flavor not matching your expectation or memory</li>
+
           <li>Product is too salty, too spicy, or not spicy enough</li>
+
           <li>Color or texture variation between batches (this is natural for home-made products)</li>
+
           <li>Product appearance differs slightly from website images</li>
+
           <li>Delivery was delayed by courier partner</li>
+
           <li>You were not available to receive delivery</li>
+
           <li>Address was incorrect and package was returned</li>
+
           <li>Product damaged because YOU stored it improperly after delivery</li>
+
           <li>Product spoiled because YOU didn't refrigerate as instructed</li>
+
           <li>You consumed part of the product and then complained</li>
+
           <li>You opened the sealed package and then complained about freshness</li>
+
           <li>You didn't like the product after tasting</li>
+
           <li>You ordered the wrong product by mistake</li>
+
           <li>You changed your mind after ordering</li>
+
           <li>Product reached best-before date while in your possession</li>
+
           <li>You refused to accept delivery from courier</li>
+
         </ul>
+
       </div>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
+
         <p>ఈ క్రింది వాటికి ఫిర్యాదులు అంగీకరించబడవు: రుచి ఇష్టం లేకపోవడం, మసాలా తేడా, రంగు/ఆకృతి తేడా, డెలివరీ ఆలస్యం, తప్పు చిరునామా, సరిగ్గా నిల్వ చేయకపోవడం, కొంత తిన్న తర్వాత ఫిర్యాదు, తప్పు ఉత్పత్తి ఆర్డర్ చేయడం, మనసు మార్చుకోవడం.</p>
+
       </div>
+
     </section>
+
+
 
     <!-- Section 7: Shelf Life Table -->
+
     <section class="section">
+
       <h2>7. Perishable Product Disclaimer — Shelf Life</h2>
+
       <p>Our products are perishable with limited shelf life. Proper storage is YOUR responsibility after delivery. Please refer to the shelf life table below:</p>
+
       
+
       <table class="shelf-table">
+
         <thead>
+
           <tr>
+
             <th>Product</th>
+
             <th>Shelf Life</th>
+
             <th>Best Before</th>
+
             <th>Storage Instructions</th>
+
           </tr>
+
         </thead>
+
         <tbody>
+
           <tr>
+
             <td><strong>Veg Pickles</strong></td>
+
             <td>6 months</td>
+
             <td>6 months from mfg.</td>
+
             <td>Cool, dry place. Refrigerate after opening. Keep away from moisture.</td>
+
           </tr>
+
           <tr>
+
             <td><strong>Non-Veg Pickles</strong></td>
+
             <td>6 months</td>
+
             <td>6 months from mfg.</td>
+
             <td>Must refrigerate after opening. Consume within 30 days of opening.</td>
+
           </tr>
+
           <tr>
+
             <td><strong>Snacks</strong></td>
+
             <td>30–60 days</td>
+
             <td>30–60 days from mfg.</td>
+
             <td>Airtight container. Cool, dry place. Avoid humidity.</td>
+
           </tr>
+
           <tr>
+
             <td><strong>Sweets</strong></td>
+
             <td>7–15 days</td>
+
             <td>7–15 days from mfg.</td>
+
             <td>Refrigerate for best freshness. Consume as early as possible.</td>
+
           </tr>
+
         </tbody>
+
       </table>
+
       
+
       <div class="highlight-box warning">
+
         <p><strong>⚠️ Your Responsibility:</strong> If a product spoils due to improper storage on your part after delivery, NO refund, return, or replacement will be provided.</p>
+
       </div>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
+
         <p>శాఖాహార పచ్చళ్లు 12 నెలలు, మాంసాహార పచ్చళ్లు 6 నెలలు, స్నాక్స్ 30-60 రోజులు, స్వీట్లు 7-15 రోజులు నిల్వ ఉంటాయి. డెలివరీ తర్వాత సరిగ్గా నిల్వ చేయడం మీ బాధ్యత. మీ తప్పు వల్ల ఉత్పత్తి పాడైతే రీఫండ్/రీప్లేస్‌మెంట్ ఇవ్వబడదు.</p>
+
       </div>
+
     </section>
+
+
 
     <!-- Section 8: Customer Responsibility -->
+
     <section class="section">
+
       <h2>8. Customer Responsibility</h2>
-      <p>By purchasing from Samskruthi Home Foods, you agree to the following responsibilities:</p>
+
+      <p>By purchasing from Sai Lakshmi Home Foods, you agree to the following responsibilities:</p>
+
       
+
       <h3>Before Purchase:</h3>
+
       <ul>
+
         <li>Read the product description, ingredients, and shelf life information carefully</li>
+
         <li>Ensure you are not allergic to any ingredients</li>
+
         <li>Review your order, delivery address, and contact details before payment</li>
+
         <li>Take a screenshot of your order summary for your records</li>
+
       </ul>
+
       
+
       <h3>At Time of Delivery:</h3>
+
       <ul>
+
         <li>Be available at the delivery address or arrange for someone to receive</li>
+
         <li>Inspect the package for external damage BEFORE accepting from courier</li>
+
         <li>If package appears damaged, you may refuse delivery (inform us immediately)</li>
+
         <li>Once you accept delivery, you accept the package condition</li>
+
       </ul>
+
       
+
       <h3>After Delivery:</h3>
+
       <ul>
+
         <li>Store products correctly as per instructions on packaging</li>
+
         <li>Refrigerate products that require refrigeration</li>
+
         <li>Consume within the best-before date</li>
+
         <li>Use clean, dry spoons when serving pickles</li>
+
       </ul>
+
       
+
       <div class="highlight-box info">
-        <p><strong>📱 Screenshot Advice:</strong> We strongly advise taking screenshots of your order summary, delivery address, and payment confirmation. Samskruthi Home Foods is not responsible for disputes arising from your failure to review the order details before payment.</p>
+
+        <p><strong>📱 Screenshot Advice:</strong> We strongly advise taking screenshots of your order summary, delivery address, and payment confirmation. Sai Lakshmi Home Foods is not responsible for disputes arising from your failure to review the order details before payment.</p>
+
       </div>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
+
         <p>కొనుగోలు చేయడానికి ముందు ఉత్పత్తి వివరాలు చదవండి, అలర్జీలు తనిఖీ చేయండి, ఆర్డర్ వివరాలు సమీక్షించండి. డెలివరీ సమయంలో ప్యాకేజీ తనిఖీ చేయండి - దెబ్బతినినట్లు కనిపిస్తే తీసుకోవద్దు. డెలివరీ తర్వాత సరిగ్గా నిల్వ చేయండి, సూచనలు పాటించండి.</p>
+
       </div>
+
     </section>
+
+
 
     <!-- Section 9: Governing Law & Jurisdiction -->
+
     <section class="section">
+
       <h2>9. Governing Law & Jurisdiction</h2>
+
       <p>This Refund and Return Policy is governed by the laws of India, including:</p>
+
       <ul>
+
         <li>The Consumer Protection Act, 2019</li>
+
         <li>The Food Safety and Standards Act, 2006 (FSSAI)</li>
+
         <li>The Information Technology Act, 2000</li>
+
         <li>Other applicable central and state laws</li>
+
       </ul>
+
       
+
       <p><strong>Exclusive Jurisdiction:</strong> Any disputes, claims, or legal proceedings arising from this policy or your purchase shall be subject to the exclusive jurisdiction of the courts located in <strong>Vijayawada, Andhra Pradesh, India</strong>.</p>
+
       
+
       <p>By using this website and making purchases, you consent to this exclusive jurisdiction and waive any objection to venue in these courts.</p>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
+
         <p>ఈ విధానం భారత దేశ చట్టాల ప్రకారం పాలించబడుతుంది. ఏదైనా వివాదాలు విజయవాడ, ఆంధ్రప్రదేశ్ కోర్టుల పరిధిలో మాత్రమే పరిష్కరించబడతాయి.</p>
+
       </div>
+
     </section>
 
+
+
     <!-- Section 10: Contact -->
+
     <section class="section">
+
       <h2>10. Contact Us</h2>
+
       <p>For any questions or to report an exception (within 24 hours of delivery), please contact us:</p>
+
       
-      <p><strong>📞 Phone:</strong> 085006 77977</p>
-      <p><strong>📧 Email:</strong> <a href="mailto:manasamskruthihomefoods@gmail.com" style="color: var(--primary);">manasamskruthihomefoods@gmail.com</a></p>
+
+      <p><strong>📞 Phone:</strong> 099665 39144</p>
+
+      <p><strong>📧 Email:</strong> <a href="mailto:manaSai Lakshmihomefoods@gmail.com" style="color: var(--primary);">manaSai Lakshmihomefoods@gmail.com</a></p>
+
       <p><strong>⏰ Hours:</strong> 8:30 AM – 9:00 PM (Monday to Sunday)</p>
+
       
+
       <p><strong>📍 Address:</strong><br>
-        Samskruthi Home Foods<br>
-        41, Road No. 1, Srinivasa Nagar Bank Colony,<br>
-        Kanuru, Andhra Pradesh 520008, India
+
+        Sai Lakshmi Home Foods<br>
+
+        50-27-14, Gurudwara Up Road, Near Eenadu Junction,<br>
+
+        Opp. Electrical Substation, Akkayapalem, Balayya Sastri Layout, Seethammadara, Visakhapatnam, Andhra Pradesh 530013, India
+
       </p>
+
       
+
       <div class="highlight-box warning">
+
         <p><strong>⚠️ Remember:</strong> Exception claims must be made within 24 hours of delivery with photo/video evidence. Claims outside this window will not be processed.</p>
+
       </div>
+
       
+
       <div class="telugu-summary">
+
         <h4>తెలుగు సారాంశం:</h4>
-        <p>ఏవైనా ప్రశ్నలు లేదా మినహాయింపు నివేదించడానికి (డెలివరీ 24 గంటల్లోపు), 085006 77977 కు కాల్ చేయండి. ఉదయం 8:30 నుండి రాత్రి 9:00 వరకు, వారంలో అన్ని రోజులు.</p>
+
+        <p>ఏవైనా ప్రశ్నలు లేదా మినహాయింపు నివేదించడానికి (డెలివరీ 24 గంటల్లోపు), 099665 39144 కు కాల్ చేయండి. ఉదయం 8:30 నుండి రాత్రి 9:00 వరకు, వారంలో అన్ని రోజులు.</p>
+
       </div>
+
     </section>
+
+
 
   </main>
 
+
+
   <!-- Footer -->
+
   <footer class="footer">
-    <p><strong>Samskruthi Home Foods</strong></p>
-    <p>41, Road No. 1, Srinivasa Nagar Bank Colony, Kanuru, Andhra Pradesh 520008</p>
-    <p>📞 085006 77977 | 📧 manasamskruthihomefoods@gmail.com</p>
+
+    <p><strong>Sai Lakshmi Home Foods</strong></p>
+
+    <p>50-27-14, Gurudwara Up Road, Near Eenadu Junction, Opp. Electrical Substation, Akkayapalem, Balayya Sastri Layout, Seethammadara, Visakhapatnam, Andhra Pradesh 530013</p>
+
+    <p>📞 099665 39144 | 📧 manaSai Lakshmihomefoods@gmail.com</p>
+
     <p>⏰ 8:30 AM – 9:00 PM (Mon–Sun)</p>
+
     <p class="tagline-footer">All products are home-made with love in Andhra Pradesh 🌶️</p>
-    <p class="copyright">© 2025 Samskruthi Home Foods. All Rights Reserved.</p>
+
+    <p class="copyright">© 2025 Sai Lakshmi Home Foods. All Rights Reserved.</p>
+
   </footer>
+
 </body>
+
 </html>
+
+
+

@@ -44,8 +44,8 @@ const AdminLayout = () => {
         {/* Logo */}
         <div className="flex items-center justify-center h-16 bg-[#111111] border-b border-[#2a2a2a] flex-shrink-0">
           <img
-            src="https://res.cloudinary.com/ddrul5cxk/image/upload/v1775983611/samskruthi_pfp_awt66q.jpg"
-            alt="Samskruthi"
+            src="https://res.cloudinary.com/ddrul5cxk/image/upload/sailakshmi.webp"
+            alt="Sai Lakshmi Home Foods"
             className="w-9 h-9 rounded-full border-2 border-[#FFD700]"
           />
         </div>
@@ -78,11 +78,11 @@ const AdminLayout = () => {
         {/* Logo */}
         <div className="flex items-center gap-2.5">
           <img
-            src="https://res.cloudinary.com/ddrul5cxk/image/upload/v1775983611/samskruthi_pfp_awt66q.jpg"
-            alt="Samskruthi"
+            src="https://res.cloudinary.com/ddrul5cxk/image/upload/sailakshmi.webp"
+            alt="Sai Lakshmi Home Foods"
             className="w-8 h-8 rounded-full border-2 border-[#FFD700]"
           />
-          <span className="text-[#FFD700] text-sm font-semibold tracking-wide">Samskruthi</span>
+          <span className="text-[#FFD700] text-sm font-semibold tracking-wide">Sai Lakshmi</span>
         </div>
         {/* Logout on mobile */}
         <button onClick={handleLogout}

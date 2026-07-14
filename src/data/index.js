@@ -9,11 +9,10 @@
  */
 
 // Import category images
-import vegPicklesImg from '../assets/images/VegPickles.png';
-import nonVegPicklesImg from '../assets/images/NonVegPickles.png';
-import podisImg from '../assets/images/Podis.png';
-import snacksImg from '../assets/images/Snacks.png';
-import sweetsImg from '../assets/images/Sweets.png';
+import vegPicklesImg from '../assets/images/VegPickles.webp';
+import podisImg from '../assets/images/Podis.webp';
+import snacksImg from '../assets/images/Snacks.webp';
+import sweetsImg from '../assets/images/Sweets.webp';
 
 // Re-export product images utility
 export { 
@@ -51,12 +50,6 @@ export const categories = [
     image: vegPicklesImg,
   },
   {
-    id: 2,
-    name: 'Non Veg Pickles',
-    slug: 'non-veg-pickles',
-    image: nonVegPicklesImg,
-  },
-  {
     id: 3,
     name: 'Podis',
     slug: 'podis',
@@ -83,7 +76,6 @@ export const categories = [
 export const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'Veg Pickles', href: '/veg-pickles' },
-  { name: 'Non Veg Pickles', href: '/non-veg-pickles' },
   { name: 'Podis', href: '/podis' },
   { name: 'Sweets', href: '/sweets' },
   { name: 'Snacks', href: '/snacks' },
@@ -103,15 +95,14 @@ export const footerLinks = {
   ],
   categories: [
     { name: 'Veg Pickles', href: '/veg-pickles' },
-    { name: 'Non Veg Pickles', href: '/non-veg-pickles' },
     { name: 'Podis', href: '/podis' },
     { name: 'Sweets', href: '/sweets' },
     { name: 'Snacks', href: '/snacks' },
   ],
   contact: {
-    phone: '+91 85006 77977',
-    email: 'hello@samskruthifoods.com',
-    address: 'Hyderabad, Telangana, India',
+    phone: '+91 99665 39144',
+    email: 'sailakshmihomefoods@gmail.com',
+    address: '50-27-14, Gurudwara Up Road, Near Eenadu Junction, Akkayapalem, Visakhapatnam, Andhra Pradesh 530013',
   },
   social: [
     { name: 'Facebook', href: 'https://facebook.com' },
@@ -126,7 +117,7 @@ export const footerLinks = {
 // (Used for featuring specific products on homepage)
 // ============================================
 
-export const bestSellerIds = [1, 2, 3, 4, 7, 8, 204, 102];
-export const newArrivalIds = [9, 10, 11, 12, 208, 101];
+export const bestSellerIds = [1, 2, 7, 8, 101, 208, 212];
+export const newArrivalIds = [208, 212, 101, 1, 2, 7, 8];
 
 // Note: Actual product data is fetched from API via ProductConfigContext
