@@ -72,6 +72,13 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
+    // Fix Cross-Origin-Opener-Policy warning from Firebase Auth popup.
+    // 'same-origin-allow-popups' lets Firebase close the OAuth popup window
+    // without being blocked by the browser's COOP policy.
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin-allow-popups',
+      'Cross-Origin-Embedder-Policy': 'unsafe-none',
+    },
   },
   
   // Preview configuration

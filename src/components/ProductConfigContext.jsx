@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { mergeProductWithImages, calculateWeightPrices, bestSellerIds, newArrivalIds } from '../data';
+import { mergeProductWithImages, calculateWeightPrices } from '../data';
 import { productAPI } from '../services/api.js';
 
 const ProductConfigContext = createContext();
@@ -129,16 +129,17 @@ export const ProductConfigProvider = ({ children }) => {
   }, [getAllProducts]);
 
   const getBestSellers = useCallback(() => {
-    return bestSellerIds
-      .map((id) => getProduct(id))
-      .filter((product) => product !== null && product.isActive !== false);
-  }, [getProduct]);
+    // Return products marked as featured (best sellers) from the loaded catalog
+    return products.filter((product) => product.isActive !== false && product.featured === true);
+  }, [products]);
 
   const getNewArrivals = useCallback(() => {
-    return newArrivalIds
-      .map((id) => getProduct(id))
-      .filter((product) => product !== null && product.isActive !== false);
-  }, [getProduct]);
+    // Return recently added active products sorted by creation date
+    return products
+      .filter((product) => product.isActive !== false)
+      .slice()
+      .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+  }, [products]);
 
   const isInStock = useCallback((productId) => {
     const product = getProduct(productId);

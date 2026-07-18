@@ -40,32 +40,36 @@ export const STANDARD_WEIGHTS = ['250gm', '500gm', '1kg', '2kg'];
 
 // ============================================
 // CATEGORIES DATA
+// Only categories that contain authorised products.
+// NOTE: These are UI navigation items, NOT products.
+//       Do not use numeric IDs here — use string slugs to avoid
+//       any accidental collision with product IDs.
 // ============================================
 
 export const categories = [
   {
-    id: 1,
-    name: 'Veg Pickles',
-    slug: 'veg-pickles',
-    image: vegPicklesImg,
-  },
-  {
-    id: 3,
-    name: 'Podis',
-    slug: 'podis',
-    image: podisImg,
-  },
-  {
-    id: 4,
+    id: 'sweets',
     name: 'Sweets',
     slug: 'sweets',
     image: sweetsImg,
   },
   {
-    id: 5,
+    id: 'snacks',
     name: 'Snacks',
     slug: 'snacks',
     image: snacksImg,
+  },
+  {
+    id: 'veg-pickles',
+    name: 'Veg Pickles',
+    slug: 'veg-pickles',
+    image: vegPicklesImg,
+  },
+  {
+    id: 'podis',
+    name: 'Podis',
+    slug: 'podis',
+    image: podisImg,
   },
 ];
 
@@ -74,11 +78,11 @@ export const categories = [
 // ============================================
 
 export const navLinks = [
-  { name: 'Home', href: '/' },
+  { name: 'Home',        href: '/' },
+  { name: 'Sweets',      href: '/sweets' },
+  { name: 'Snacks',      href: '/snacks' },
   { name: 'Veg Pickles', href: '/veg-pickles' },
-  { name: 'Podis', href: '/podis' },
-  { name: 'Sweets', href: '/sweets' },
-  { name: 'Snacks', href: '/snacks' },
+  { name: 'Podis',       href: '/podis' },
 ];
 
 // ============================================
@@ -87,37 +91,33 @@ export const navLinks = [
 
 export const footerLinks = {
   quickLinks: [
-    { name: 'About Us', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'FAQ', href: '/faq' },
+    { name: 'About Us',        href: '/about' },
+    { name: 'Contact',         href: '/contact' },
+    { name: 'FAQ',             href: '/faq' },
     { name: 'Shipping Policy', href: '/shipping' },
-    { name: 'Return Policy', href: '/returns' },
+    { name: 'Return Policy',   href: '/returns' },
   ],
   categories: [
+    { name: 'Sweets',      href: '/sweets' },
+    { name: 'Snacks',      href: '/snacks' },
     { name: 'Veg Pickles', href: '/veg-pickles' },
-    { name: 'Podis', href: '/podis' },
-    { name: 'Sweets', href: '/sweets' },
-    { name: 'Snacks', href: '/snacks' },
+    { name: 'Podis',       href: '/podis' },
   ],
   contact: {
-    phone: '+91 99665 39144',
-    email: 'sailakshmihomefoods@gmail.com',
-    address: '50-27-14, Gurudwara Up Road, Near Eenadu Junction, Akkayapalem, Visakhapatnam, Andhra Pradesh 530013',
+    phone:   '+91 99665 39144',
+    email:   'sailakshmihomefoods.vskp@gmail.com',
+    address: '50-27-14, Gurudwara Up Road, Opp. Electrical Substation, Akkayapalem, Balayya Sastri Layout, Seethammadara, Visakhapatnam, Andhra Pradesh 530013',
   },
   social: [
-    { name: 'Facebook', href: 'https://facebook.com' },
+    { name: 'Facebook',  href: 'https://facebook.com' },
     { name: 'Instagram', href: 'https://instagram.com' },
-    { name: 'Twitter', href: 'https://twitter.com' },
-    { name: 'YouTube', href: 'https://youtube.com' },
+    { name: 'Twitter',   href: 'https://twitter.com' },
+    { name: 'YouTube',   href: 'https://youtube.com' },
   ],
 };
 
 // ============================================
-// BEST SELLER & NEW ARRIVAL PRODUCT IDS
-// (Used for featuring specific products on homepage)
+// HOMEPAGE PRODUCT SECTIONS
+// Products are loaded dynamically from the database.
+// Use the Admin Panel to manage best sellers and featured products.
 // ============================================
-
-export const bestSellerIds = [1, 2, 7, 8, 101, 208, 212];
-export const newArrivalIds = [208, 212, 101, 1, 2, 7, 8];
-
-// Note: Actual product data is fetched from API via ProductConfigContext

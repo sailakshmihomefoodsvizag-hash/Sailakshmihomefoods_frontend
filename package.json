@@ -225,6 +225,7 @@
     "react-router-dom": "^6.30.3",
     "read-cache": "^1.0.0",
     "readdirp": "^3.6.0",
+    "recharts": "^2.15.0",
     "reflect.getprototypeof": "^1.0.10",
     "regexp.prototype.flags": "^1.5.4",
     "require-directory": "^2.1.1",

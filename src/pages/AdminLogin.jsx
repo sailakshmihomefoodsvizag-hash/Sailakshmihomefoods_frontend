@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Phone, Lock, Loader2, ShieldCheck } from 'lucide-react';
+import { Phone, Lock, Loader2 } from 'lucide-react';
 import { adminAPI } from '../services/adminAPI';
 
 const AdminLogin = () => {
@@ -47,8 +47,8 @@ const AdminLogin = () => {
         <div className="relative z-10 p-6 sm:p-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-            <ShieldCheck className="w-8 h-8 text-white drop-shadow-lg" />
+          <div className="w-16 h-16 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg overflow-hidden">
+            <img src="/sailakshmi.webp" alt="Sai Lakshmi Home Foods" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white font-rubik drop-shadow-lg">
             Admin Login

@@ -1,23 +1,33 @@
 /**
  * Centralized API Configuration
- * 
- * This file manages all API endpoint configurations and provides
- * a consistent way to make API calls across the application.
+ *
+ * URL resolution order (Vite env file precedence):
+ *   .env.local        → local development  (VITE_API_URL=http://localhost:5000/api)
+ *   .env.production   → production build   (VITE_API_URL=https://your-backend.vercel.app/api)
+ *   .env              → shared fallback     (no VITE_API_URL — forces explicit config)
+ *
+ * Never hardcode a URL in this file.
  */
 
-// Get API base URL from environment variable — strip any trailing slash
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/+$/, '');
+const RAW_URL = import.meta.env.VITE_API_URL;
+
+if (!RAW_URL) {
+  console.error(
+    '[apiConfig] VITE_API_URL is not set.\n' +
+    '  • For local dev: add VITE_API_URL=http://localhost:5000/api to frontend/.env.local\n' +
+    '  • For production build: add VITE_API_URL=https://your-backend.vercel.app/api to frontend/.env.production'
+  );
+}
+
+// Strip any trailing slash so endpoint concatenation is always clean
+export const API_URL = (RAW_URL || 'http://localhost:5000/api').replace(/\/+$/, '');
 
 /**
- * Makes an API request
- * @param {string} endpoint - The API endpoint (e.g., '/user/profile')
- * @param {object} options - Fetch options (method, headers, body, etc.)
- * @returns {Promise<any>} The response data
+ * Make a plain (unauthenticated) API request.
  */
 export const apiRequest = async (endpoint, options = {}) => {
-  // Remove leading slash to avoid double slashes
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint.slice(1) : endpoint;
-  const url = `${API_BASE_URL}/${cleanEndpoint}`;
+  const url = `${API_URL}/${cleanEndpoint}`;
 
   const config = {
     method: options.method || 'GET',
@@ -34,43 +44,28 @@ export const apiRequest = async (endpoint, options = {}) => {
   try {
     const response = await fetch(url, config);
     const data = await response.json();
-
-    if (!response.ok) {
-      return data;
-    }
-
     return data;
   } catch (error) {
+    console.error(`[apiRequest] ${config.method} ${url} →`, error.message);
     return { success: false, message: 'Network error. Please try again.' };
   }
 };
 
 /**
- * Makes an authenticated API request with Authorization header
- * @param {string} endpoint - The API endpoint
- * @param {string} token - The authentication token
- * @param {object} options - Fetch options
- * @returns {Promise<any>} The response data
+ * Make an authenticated API request (adds Authorization: Bearer <token> header).
  */
 export const authenticatedRequest = async (endpoint, token, options = {}) => {
   if (!token) {
-    throw new Error('Authentication required');
+    throw new Error('Authentication required — no token provided');
   }
 
   return apiRequest(endpoint, {
     ...options,
     headers: {
       ...options.headers,
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 };
 
-// Export the base URL for other uses
-export const API_URL = API_BASE_URL;
-
-export default {
-  apiRequest,
-  authenticatedRequest,
-  API_URL,
-};
+export default { apiRequest, authenticatedRequest, API_URL };

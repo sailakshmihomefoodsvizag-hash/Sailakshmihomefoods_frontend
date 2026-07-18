@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import ProductSlider from './ProductSlider';
 import ProductCard from './ProductCard';
 import SkeletonCard from './SkeletonCard';
@@ -7,9 +7,9 @@ import { productAPI } from '../services/api.js';
 import { mergeProductWithImages } from '../data';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 4;
 
-const YouMayAlsoLike = () => {
+const YouMayAlsoLike = ({ currentProductId, currentCategory } = {}) => {
   const sectionRef = useRef(null);
   const isVisible = useIntersectionObserver(sectionRef, {
     rootMargin: '200px 0px',
@@ -21,39 +21,32 @@ const YouMayAlsoLike = () => {
     data,
     isPending,
     isError,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ['products', 'you-may-also-like', PAGE_SIZE],
-    initialPageParam: 1,
+  } = useQuery({
+    queryKey: ['products', 'you-may-also-like', PAGE_SIZE, currentProductId, currentCategory],
     enabled: isVisible,
     staleTime: 2 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
-    queryFn: async ({ pageParam }) => {
-      const response = await productAPI.getYouMayAlsoLike({ page: pageParam, limit: PAGE_SIZE });
+    queryFn: async () => {
+      const response = await productAPI.getYouMayAlsoLike({
+        limit: PAGE_SIZE,
+        excludeId: currentProductId,
+        category: currentCategory,
+      });
       if (!response?.success) {
         throw new Error(response?.message || 'Failed to load recommendations');
       }
 
-      return {
-        ...response,
-        products: (response.products || []).map(mergeProductWithImages),
-      };
-    },
-    getNextPageParam: (lastPage) => {
-      const pagination = lastPage?.pagination;
-      if (!pagination?.hasNextPage) return undefined;
-      return pagination.page + 1;
+      return (response.products || []).map(mergeProductWithImages);
     },
   });
 
-  const products = useMemo(
-    () => (data?.pages || []).flatMap((page) => page.products || []),
-    [data]
-  );
-
+  const products = useMemo(() => data || [], [data]);
   const showSkeleton = !isVisible || (isPending && products.length === 0);
+
+  // Hide section entirely if no products and not loading
+  if (!showSkeleton && !isError && products.length === 0) {
+    return null;
+  }
 
   return (
     <section id="youmaylike" ref={sectionRef} className="py-10 sm:py-14 lg:py-16">
@@ -63,7 +56,7 @@ const YouMayAlsoLike = () => {
         </h2>
 
         {showSkeleton ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {Array.from({ length: PAGE_SIZE }).map((_, index) => (
               <SkeletonCard key={`you-may-like-skeleton-${index}`} />
             ))}
@@ -73,20 +66,7 @@ const YouMayAlsoLike = () => {
             Unable to load recommendations right now.
           </div>
         ) : (
-          <>
-            <ProductSlider products={products} CardComponent={ProductCard} />
-            {hasNextPage && (
-              <div className="flex justify-center mt-6">
-                <button
-                  onClick={() => fetchNextPage()}
-                  disabled={isFetchingNextPage}
-                  className="px-5 py-2.5 rounded-xl bg-primary text-white font-montserrat text-sm hover:bg-primary-dark disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
-                >
-                  {isFetchingNextPage ? 'Loading...' : 'Load More'}
-                </button>
-              </div>
-            )}
-          </>
+          <ProductSlider products={products} CardComponent={ProductCard} />
         )}
       </div>
     </section>

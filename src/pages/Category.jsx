@@ -40,8 +40,16 @@ const Category = () => {
     }
   }, [ensureProductsLoaded, hasLoadedCatalog]);
 
-  // Get products by category with overrides applied
-  const categoryProducts = getProductsByCategory(categoryName);
+  // Get products by category — guard against any non-product objects
+  // (e.g. category banner objects that share the same slug-match logic)
+  const categoryProducts = getProductsByCategory(categoryName).filter(
+    (item) =>
+      item &&
+      typeof item.pricePerKg === 'number' &&
+      item.pricePerKg > 0 &&
+      typeof item.category === 'string' &&
+      Array.isArray(item.weights)
+  );
 
   // Apply filters
   const filteredProducts = useMemo(() => {
@@ -94,24 +102,22 @@ const Category = () => {
       <Navbar />
 
       {/* Page Header */}
-      <div className="bg-white/80 backdrop-blur-sm">
+      <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Back Button */}
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors font-montserrat text-sm mb-4"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors font-montserrat text-sm mb-3"
           >
             <ChevronLeft className="w-4 h-4" />
             Back to Home
           </Link>
 
           {/* Category Title */}
-          <h1 className="font-rubik font-bold text-[32px] sm:text-[38px] lg:text-[42px] text-gray-800">
+          <h1 className="font-rubik font-bold text-[28px] sm:text-[34px] lg:text-[38px] text-gray-900">
             {categoryName}
           </h1>
         </div>
-        {/* Divider Line */}
-        <div className="border-b border-gray-200/50" />
       </div>
 
       {/* Main Content */}

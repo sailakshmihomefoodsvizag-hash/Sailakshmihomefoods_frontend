@@ -17,6 +17,14 @@ if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
   throw new Error('Firebase configuration is missing required environment variables');
 }
 
+// DEV-ONLY: Log non-sensitive config values to confirm the right project is loaded
+if (import.meta.env.DEV) {
+  console.log('[Firebase] Initialising with config:');
+  console.log('  projectId  :', firebaseConfig.projectId);
+  console.log('  authDomain :', firebaseConfig.authDomain);
+  console.log('  appId      :', firebaseConfig.appId);
+}
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 

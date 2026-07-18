@@ -327,13 +327,13 @@ const OrderCard = ({ order, onReorder, onDelete, onTrack, activeMenu, toggleMenu
         {/* 3 Dot Menu */}
         <div className="relative">
           <button
-            onClick={() => toggleMenu(order._id)}
+            onClick={() => toggleMenu(order.orderId)}
             className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-full transition-colors"
           >
             <span className="text-lg font-bold leading-none">⋮</span>
           </button>
 
-          {activeMenu === order._id && (
+          {activeMenu === order.orderId && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => toggleMenu(null)} />
               <div className="absolute right-0 mt-1 bg-white shadow-lg rounded-md w-40 z-20 border border-gray-100 overflow-hidden">
@@ -503,8 +503,8 @@ const Orders = () => {
       const response = await orderAPI.deleteOrder(token, order.orderId);
       
       if (response.success) {
-        // Remove from list
-        setOrders(orders.filter(o => o._id !== order._id));
+        // Remove from list by orderId (Supabase uses orderId, not _id)
+        setOrders(prev => prev.filter(o => o.orderId !== order.orderId));
       } else {
         throw new Error(response.message || 'Failed to delete order');
       }
@@ -570,7 +570,7 @@ const Orders = () => {
               ) : (
                 orders.map((order) => (
                   <OrderCard
-                    key={order._id}
+                    key={order.orderId}
                     order={order}
                     onTrack={handleTrack}
                     onReorder={handleReorder}

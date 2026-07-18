@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { X, Minus, Plus, Trash2 } from 'lucide-react';
+import { X, Minus, Plus, Trash2, Check } from 'lucide-react';
 import { useCheckout } from './CheckoutContext';
+import { FREE_DELIVERY_THRESHOLD } from '../utils/deliveryUtils.js';
 
 const CartDrawer = ({ isOpen, onClose, cartItems, updateQuantity, removeItem }) => {
   const { openCheckout } = useCheckout();
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const freeShippingThreshold = 499;
-  const amountForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
+  const freeLocalThreshold = FREE_DELIVERY_THRESHOLD;
+  const amountForFreeShipping = Math.max(0, freeLocalThreshold - subtotal);
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const progressPercent = Math.min(100, (subtotal / freeLocalThreshold) * 100);
 
   const handleBuyNow = () => {
     onClose();
@@ -48,24 +50,31 @@ const CartDrawer = ({ isOpen, onClose, cartItems, updateQuantity, removeItem }) 
           <p className="text-sm text-gray-600 font-montserrat">Homemade & Authentic Foods</p>
         </div>
 
-        {/* Free Shipping Progress */}
-        <div className="px-4 sm:px-6 py-4 bg-gray-50">
+        {/* Free Local Delivery Progress */}
+        <div className={`px-4 sm:px-6 py-3.5 ${amountForFreeShipping === 0 ? 'bg-emerald-50' : 'bg-gray-50'} transition-colors duration-300`}>
           {amountForFreeShipping > 0 ? (
             <p className="text-sm text-gray-600 font-montserrat text-center">
-              Add items worth <span className="font-semibold text-primary">₹{amountForFreeShipping}</span> & Get Free Shipping
+              Add <span className="font-semibold text-[#7B0D1E]">₹{amountForFreeShipping}</span> more for free local delivery
             </p>
           ) : (
             <div className="flex items-center justify-center gap-2">
-              <span className="font-semibold text-green-600 font-montserrat">₹{freeShippingThreshold}</span>
-              <span className="text-sm text-green-600 font-montserrat">Free Shipping</span>
+              <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
+                <Check className="w-3 h-3 text-white" strokeWidth={3} />
+              </div>
+              <span className="text-sm text-emerald-700 font-montserrat font-semibold">Free Local Delivery Applied</span>
             </div>
           )}
-          <div className="mt-2 h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="mt-2 h-1.5 bg-gray-200 rounded-full overflow-hidden">
             <div
-              className="h-full bg-primary rounded-full transition-all duration-300"
-              style={{ width: `${Math.min(100, (subtotal / freeShippingThreshold) * 100)}%` }}
+              className={`h-full rounded-full transition-all duration-500 ease-out ${amountForFreeShipping === 0 ? 'bg-emerald-500' : 'bg-[#7B0D1E]'}`}
+              style={{ width: `${progressPercent}%` }}
             />
           </div>
+          {amountForFreeShipping === 0 && (
+            <p className="text-[11px] text-emerald-600 font-montserrat text-center mt-1.5">
+              Applies to Visakhapatnam deliveries
+            </p>
+          )}
         </div>
 
         {/* Cart Items */}

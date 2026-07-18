@@ -4,11 +4,11 @@ import { API_URL, apiRequest, authenticatedRequest } from './apiConfig.js';
 const adminApiCall = async (endpoint, options = {}) => {
   const token = localStorage.getItem('adminToken');
   
-  if (token) {
-    return authenticatedRequest(endpoint, token, options);
-  } else {
-    return apiRequest(endpoint, options);
+  if (!token) {
+    return { success: false, message: 'Admin authentication required. Please log in.' };
   }
+  
+  return authenticatedRequest(endpoint, token, options);
 };
 
 // Valid order statuses
@@ -86,81 +86,105 @@ export const adminAPI = {
   getProducts: async () => {
     return adminApiCall('/admin/products');
   },
-  
-  updateProduct: async (productId, data) => {
-    // Validate productId
-    if (productId === undefined || productId === null) {
-      return { success: false, message: 'Product ID is required' };
-    }
-    
+
+  /**
+   * Create a new product. Accepts optional imageFile (File object).
+   */
+  createProduct: async (data, imageFile = null) => {
+    const token = localStorage.getItem('adminToken');
+    const formData = new FormData();
+
+    // Append all fields
+    Object.entries(data).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, String(value));
+      }
+    });
+
+    if (imageFile) formData.append('image', imageFile);
+
+    const response = await fetch(`${API_URL}/admin/products`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+
+    return response.json();
+  },
+
+  updateProduct: async (productId, data, imageFile = null) => {
+    if (!productId) return { success: false, message: 'Product ID is required' };
+
     const numericProductId = Number(productId);
     if (isNaN(numericProductId) || numericProductId <= 0) {
       return { success: false, message: 'Product ID must be a positive number' };
     }
-    
-    // Validate data object
-    if (!data || typeof data !== 'object' || Array.isArray(data)) {
-      return { success: false, message: 'Update data must be an object' };
+
+    const token = localStorage.getItem('adminToken');
+
+    // If there's an image, use FormData (multipart)
+    if (imageFile) {
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) formData.append(key, String(value));
+      });
+      formData.append('image', imageFile);
+
+      const response = await fetch(`${API_URL}/admin/products/${numericProductId}`, {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
+      return response.json();
     }
-    
-    // Build cleaned data with only valid fields
+
+    // No image — JSON body
     const cleanedData = {};
-    
-    // pricePerKg - must be a valid positive number
-    if (data.pricePerKg !== undefined && data.pricePerKg !== null && data.pricePerKg !== '') {
-      const price = Number(data.pricePerKg);
-      if (!isNaN(price) && price > 0) {
-        cleanedData.pricePerKg = price;
-      }
+    if (data.pricePerKg !== undefined) {
+      const p = Number(data.pricePerKg);
+      if (!isNaN(p) && p > 0) cleanedData.pricePerKg = p;
     }
-    
-    // inStock - boolean
-    if ('inStock' in data) {
-      cleanedData.inStock = data.inStock === true || data.inStock === 'true' || data.inStock === 1;
-    }
-    
-    // isActive - boolean
-    if ('isActive' in data) {
-      cleanedData.isActive = data.isActive === true || data.isActive === 'true' || data.isActive === 1;
-    }
-    
-    // stockQuantity - number >= 0 or null
-    if ('stockQuantity' in data) {
-      if (data.stockQuantity === null || data.stockQuantity === '') {
-        cleanedData.stockQuantity = null;
-      } else {
-        const qty = Number(data.stockQuantity);
-        if (!isNaN(qty) && qty >= 0) {
-          cleanedData.stockQuantity = qty;
-        }
-      }
-    }
-    
-    // name - non-empty string
-    if (data.name !== undefined && data.name !== null && String(data.name).trim() !== '') {
-      cleanedData.name = String(data.name).trim();
-    }
-    
-    // category - string
-    if (data.category !== undefined && data.category !== null && data.category !== '') {
-      cleanedData.category = data.category;
-    }
-    
-    // Check if we have any valid fields to update
+    if ('inStock'       in data) cleanedData.inStock       = data.inStock === true || data.inStock === 'true';
+    if ('isActive'      in data) cleanedData.isActive      = data.isActive === true || data.isActive === 'true';
+    if ('stockQuantity' in data) cleanedData.stockQuantity = data.stockQuantity === null ? null : Number(data.stockQuantity);
+    if (data.name     && String(data.name).trim())     cleanedData.name     = String(data.name).trim();
+    if (data.category && String(data.category).trim()) cleanedData.category = String(data.category).trim();
+    if (data.description  !== undefined) cleanedData.description  = data.description;
+    if (data.featured     !== undefined) cleanedData.featured     = data.featured === true || data.featured === 'true';
+
     if (Object.keys(cleanedData).length === 0) {
       return { success: false, message: 'No valid fields provided for update' };
     }
-    
+
     return adminApiCall(`/admin/products/${numericProductId}`, {
       method: 'PUT',
-      body: JSON.stringify(cleanedData)
+      body: JSON.stringify(cleanedData),
     });
   },
-  
-  resetProduct: async (productId) => {
-    return adminApiCall(`/admin/products/${productId}/override`, {
-      method: 'DELETE'
+
+  deleteProduct: async (productId) => {
+    return adminApiCall(`/admin/products/${productId}`, { method: 'DELETE' });
+  },
+
+  uploadProductImage: async (productId, imageFile) => {
+    const token = localStorage.getItem('adminToken');
+    const formData = new FormData();
+    formData.append('image', imageFile);
+
+    const response = await fetch(`${API_URL}/admin/products/${productId}/image`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
     });
+    return response.json();
+  },
+
+  deleteProductImage: async (productId) => {
+    return adminApiCall(`/admin/products/${productId}/image`, { method: 'DELETE' });
+  },
+
+  resetProduct: async (productId) => {
+    return adminApiCall(`/admin/products/${productId}/override`, { method: 'DELETE' });
   },
   
   // Coupons

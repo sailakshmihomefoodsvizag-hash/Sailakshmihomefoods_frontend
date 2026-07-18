@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clear Cache — Sai Lakshmi Home Foods</title>
+  <style>
+    body { font-family: sans-serif; max-width: 520px; margin: 80px auto; padding: 0 24px; color: #1a1a1a; }
+    h1 { font-size: 1.4rem; margin-bottom: 8px; }
+    p  { color: #555; margin: 4px 0 20px; }
+    #status { padding: 14px 18px; border-radius: 8px; font-weight: 600; margin-top: 16px; }
+    .ok   { background: #d1fae5; color: #065f46; }
+    .err  { background: #fee2e2; color: #991b1b; }
+    .info { background: #e0f2fe; color: #0369a1; }
+    a { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>🗑️ Clear Browser Cache</h1>
+  <p>Opens this page, clears all service-worker caches, then redirects you home.</p>
+  <div id="status" class="info">Clearing caches…</div>
+
+  <script>
+    (async () => {
+      const status = document.getElementById('status');
+      try {
+        // 1. Unregister every service worker on this origin
+        if ('serviceWorker' in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map(r => r.unregister()));
+        }
+
+        // 2. Delete every cache storage entry
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+
+        status.className = 'ok';
+        status.textContent = `✅ Cleared ${keys.length} cache(s) and unregistered service workers. Redirecting…`;
+
+        // 3. Hard-redirect to home (bypasses any remaining cache)
+        setTimeout(() => {
+          window.location.replace('/?nocache=' + Date.now());
+        }, 1500);
+
+      } catch (err) {
+        status.className = 'err';
+        status.textContent = '❌ Error: ' + err.message;
+      }
+    })();
+  </script>
+</body>
+</html>

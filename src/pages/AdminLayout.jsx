@@ -44,7 +44,7 @@ const AdminLayout = () => {
         {/* Logo */}
         <div className="flex items-center justify-center h-16 bg-[#111111] border-b border-[#2a2a2a] flex-shrink-0">
           <img
-            src="https://res.cloudinary.com/ddrul5cxk/image/upload/sailakshmi.webp"
+            src="/sailakshmi.webp"
             alt="Sai Lakshmi Home Foods"
             className="w-9 h-9 rounded-full border-2 border-[#FFD700]"
           />
@@ -78,7 +78,7 @@ const AdminLayout = () => {
         {/* Logo */}
         <div className="flex items-center gap-2.5">
           <img
-            src="https://res.cloudinary.com/ddrul5cxk/image/upload/sailakshmi.webp"
+            src="/sailakshmi.webp"
             alt="Sai Lakshmi Home Foods"
             className="w-8 h-8 rounded-full border-2 border-[#FFD700]"
           />

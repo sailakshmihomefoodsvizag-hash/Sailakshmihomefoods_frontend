@@ -83,17 +83,17 @@ const Footer = () => {
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-secondary flex-shrink-0" />
                 <a
-                  href="mailto:sailakshmihomefoods@gmail.com"
+                  href="mailto:sailakshmihomefoods.vskp@gmail.com"
                   className="text-white/80 hover:text-white transition-colors duration-200 font-montserrat text-sm break-all"
                 >
-                  sailakshmihomefoods@gmail.com
+                  sailakshmihomefoods.vskp@gmail.com
                 </a>
               </div>
 
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
                 <p className="text-white/80 font-montserrat text-sm leading-relaxed">
-                  50-27-14, Gurudwara Up Road, Near Eenadu Junction,
+                  50-27-14, Gurudwara Up Road,
                   <br />
                   Opp. Electrical Substation, Akkayapalem,
                   <br />
