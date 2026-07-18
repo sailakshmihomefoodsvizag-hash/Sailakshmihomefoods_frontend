@@ -3,7 +3,7 @@
  *
  * URL resolution order (Vite env file precedence):
  *   .env.local        → local development  (VITE_API_URL=http://localhost:5000/api)
- *   .env.production   → production build   (VITE_API_URL=https://your-backend.vercel.app/api)
+ *   .env.production   → production build   (VITE_API_URL=https://sailakshmi-home-foods-backend.vercel.app/api)
  *   .env              → shared fallback     (no VITE_API_URL — forces explicit config)
  *
  * Never hardcode a URL in this file.
@@ -15,7 +15,7 @@ if (!RAW_URL) {
   console.error(
     '[apiConfig] VITE_API_URL is not set.\n' +
     '  • For local dev: add VITE_API_URL=http://localhost:5000/api to frontend/.env.local\n' +
-    '  • For production build: add VITE_API_URL=https://your-backend.vercel.app/api to frontend/.env.production'
+    '  • For production build: add VITE_API_URL=https://sailakshmi-home-foods-backend.vercel.app/api to frontend/.env.production'
   );
 }
 
