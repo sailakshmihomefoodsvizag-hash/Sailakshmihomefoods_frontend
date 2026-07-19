@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { X, Loader2, MapPin, User, Phone, Building, Hash, Check, Store, Truck, Package } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { X, Loader2, MapPin, User, Phone, Building, Hash, Check, Store, Truck, Package, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCheckout } from './CheckoutContext';
 import { useCart } from './CartContext';
@@ -186,7 +186,18 @@ const CheckoutModal = () => {
   const [couponLoading, setCouponLoading] = useState(false);
   const [couponError,   setCouponError]   = useState('');
 
-  // Load saved profile
+  // Ref to the error banner — scroll it into view whenever it appears
+  const errorRef      = useRef(null);
+  const scrollAreaRef = useRef(null);
+
+  // Scroll error into view when it appears
+  useEffect(() => {
+    if (error && scrollAreaRef.current) {
+      scrollAreaRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [error]);
+
+  // Load saved profile when modal opens
   useEffect(() => {
     const loadProfile = async () => {
       if (!user || !isCheckoutOpen) return;
@@ -226,6 +237,7 @@ const CheckoutModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return; // prevent double-click
     await initiatePayment(address, {
       onSuccess: () => {
         navigate('/orders');
@@ -260,13 +272,18 @@ const CheckoutModal = () => {
         </div>
 
         {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto overscroll-contain">
-          <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-5 sm:space-y-6">
+        <div ref={scrollAreaRef} className="flex-1 overflow-y-auto overscroll-contain">
+          <form onSubmit={handleSubmit} noValidate className="p-5 sm:p-6 space-y-5 sm:space-y-6">
 
-            {/* Error */}
+            {/* Error — pinned to top; auto-scrolled into view */}
             {error && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm font-montserrat">
-                {error}
+              <div
+                ref={errorRef}
+                role="alert"
+                className="flex items-start gap-3 p-3.5 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm font-montserrat animate-fade-in"
+              >
+                <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5 text-red-500" />
+                <span className="flex-1 leading-snug">{error}</span>
               </div>
             )}
 
@@ -342,31 +359,31 @@ const CheckoutModal = () => {
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input type="text" name="name" value={address.name} onChange={handleChange}
-                      placeholder="Full Name *" required
+                      placeholder="Full Name *"
                       className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:border-[#7B0D1E] focus:ring-1 focus:ring-[#7B0D1E]/20 font-montserrat text-sm" />
                   </div>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input type="tel" name="mobile" value={address.mobile} onChange={handleChange}
-                      placeholder="Mobile Number *" required
+                      placeholder="Mobile Number *"
                       className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:border-[#7B0D1E] focus:ring-1 focus:ring-[#7B0D1E]/20 font-montserrat text-sm" />
                   </div>
                   <div className="relative sm:col-span-2">
                     <MapPin className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                     <textarea name="address" value={address.address} onChange={handleChange}
-                      placeholder="Full Address *" required rows={2}
+                      placeholder="Full Address *" rows={2}
                       className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:border-[#7B0D1E] focus:ring-1 focus:ring-[#7B0D1E]/20 font-montserrat text-sm resize-none" />
                   </div>
                   <div className="relative">
                     <Building className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input type="text" name="state" value={address.state} onChange={handleChange}
-                      placeholder="State *" required
+                      placeholder="State"
                       className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:border-[#7B0D1E] focus:ring-1 focus:ring-[#7B0D1E]/20 font-montserrat text-sm" />
                   </div>
                   <div className="relative">
                     <Hash className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input type="text" name="pincode" value={address.pincode} onChange={handleChange}
-                      placeholder="Pincode *" required
+                      placeholder="Pincode *"
                       className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:border-[#7B0D1E] focus:ring-1 focus:ring-[#7B0D1E]/20 font-montserrat text-sm" />
                   </div>
                 </div>
@@ -381,13 +398,13 @@ const CheckoutModal = () => {
                   <div className="relative">
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input type="text" name="name" value={address.name} onChange={handleChange}
-                      placeholder="Full Name *" required
+                      placeholder="Full Name *"
                       className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:border-[#7B0D1E] focus:ring-1 focus:ring-[#7B0D1E]/20 font-montserrat text-sm" />
                   </div>
                   <div className="relative">
                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                     <input type="tel" name="mobile" value={address.mobile} onChange={handleChange}
-                      placeholder="Mobile Number *" required
+                      placeholder="Mobile Number *"
                       className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:outline-none focus:border-[#7B0D1E] focus:ring-1 focus:ring-[#7B0D1E]/20 font-montserrat text-sm" />
                   </div>
                 </div>
@@ -436,17 +453,20 @@ const CheckoutModal = () => {
             <button
               type="submit"
               disabled={loading || cartItems.length === 0}
-              className="w-full py-4 bg-[#7B0D1E] text-white font-semibold rounded-xl hover:bg-[#5a0010] active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-montserrat shadow-lg shadow-[#7B0D1E]/20"
+              className="w-full py-4 bg-[#7B0D1E] text-white font-semibold rounded-xl hover:bg-[#5a0010] active:scale-[0.98] transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2.5 font-montserrat shadow-lg shadow-[#7B0D1E]/20"
             >
               {loading ? (
-                <><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin flex-shrink-0" />
+                  <span>Opening payment...</span>
+                </>
               ) : (
-                `Pay ₹${total}`
+                <span>Pay ₹{total}</span>
               )}
             </button>
 
             <p className="text-center text-xs text-gray-400 font-montserrat pb-2">
-              Secure payment powered by Razorpay
+              Secured by Razorpay
             </p>
           </form>
         </div>

@@ -28,8 +28,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>Sai Lakshmi Home Foods - Premium Homemade Pickles &amp; Snacks</title>
-    <!-- Razorpay Checkout Script -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- Razorpay Checkout Script — loaded async to avoid blocking page render -->
+    <!-- The frontend loads/waits for it programmatically before opening checkout -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js" async></script>
   </head>
   <body>
     <div id="root"></div>
