@@ -138,10 +138,10 @@ const Category = () => {
           </div>
         </div>
 
-        {/* Products Grid - 2 per row */}
+        {/* Products Grid */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-2 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
               {filteredProducts.map((product) => (
                 <FoodCard key={product.id} product={product} />
               ))}

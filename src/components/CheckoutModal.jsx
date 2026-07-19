@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, Loader2, MapPin, User, Phone, Building, Hash, Clock, Check, Store, Truck, Package } from 'lucide-react';
+import { X, Loader2, MapPin, User, Phone, Building, Hash, Check, Store, Truck, Package } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useCheckout } from './CheckoutContext';
 import { useCart } from './CartContext';
@@ -69,11 +69,11 @@ const FreeDeliveryNotice = ({ method, discountedSubtotal }) => {
 
 const DeliverySelector = ({ selected, onChange, discountedSubtotal }) => {
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-2">
       {DELIVERY_OPTIONS.map((option) => {
         const isSelected = selected === option.value;
         const charge = calculateDeliveryCharge(option.value, discountedSubtotal);
-        const chargeLabel = charge === 0 ? 'Free' : `₹${charge}`;
+        const chargeLabel = charge === 0 ? 'Free' : `+₹${charge}`;
         const Icon = option.icon;
 
         return (
@@ -83,19 +83,19 @@ const DeliverySelector = ({ selected, onChange, discountedSubtotal }) => {
             aria-pressed={isSelected}
             onClick={() => onChange(option.value)}
             className={`
-              group w-full text-left rounded-xl border px-4 py-3.5
+              group w-full text-left rounded-xl border px-3 py-3 sm:px-4 sm:py-3.5
               transition-all duration-200 ease-out outline-none
               focus-visible:ring-2 focus-visible:ring-[#7B0D1E]/30 focus-visible:ring-offset-1
               ${isSelected
                 ? 'border-[#7B0D1E] bg-white shadow-[0_0_0_1px_rgba(123,13,30,0.08),0_2px_8px_rgba(123,13,30,0.06)]'
-                : 'border-gray-200 bg-white hover:border-gray-300'
+                : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50/50'
               }
             `}
           >
-            <div className="flex items-start gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               {/* Radio indicator */}
               <div className={`
-                flex-shrink-0 mt-0.5 w-[18px] h-[18px] rounded-full border-[1.5px]
+                flex-shrink-0 w-[18px] h-[18px] rounded-full border-[1.5px]
                 flex items-center justify-center transition-all duration-200
                 ${isSelected
                   ? 'border-[#7B0D1E]'
@@ -110,47 +110,41 @@ const DeliverySelector = ({ selected, onChange, discountedSubtotal }) => {
 
               {/* Icon */}
               <div className={`
-                flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center
+                flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center
                 transition-colors duration-200
                 ${isSelected ? 'bg-[#7B0D1E]/[0.07]' : 'bg-gray-50 group-hover:bg-gray-100'}
               `}>
-                <Icon className={`w-[18px] h-[18px] transition-colors duration-200 ${
+                <Icon className={`w-4 h-4 transition-colors duration-200 ${
                   isSelected ? 'text-[#7B0D1E]' : 'text-gray-500'
                 }`} strokeWidth={1.75} />
               </div>
 
               {/* Content */}
-              <div className="flex-1 min-w-0 pt-px">
-                <div className="flex items-baseline justify-between gap-3">
-                  <h4 className={`text-[13px] font-semibold font-montserrat leading-tight transition-colors duration-200 ${
-                    isSelected ? 'text-gray-900' : 'text-gray-800'
-                  }`}>
-                    {option.label}
-                    {option.sublabel && (
-                      <span className="font-normal text-gray-400 ml-1">({option.sublabel})</span>
-                    )}
-                  </h4>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0 flex-1">
+                    <span className={`block text-[13px] font-semibold font-montserrat leading-tight transition-colors duration-200 ${
+                      isSelected ? 'text-gray-900' : 'text-gray-800'
+                    }`}>
+                      {option.label}
+                      {option.sublabel && (
+                        <span className="font-normal text-gray-400 ml-1 text-[12px]">({option.sublabel})</span>
+                      )}
+                    </span>
+                    <span className="block text-[11px] text-gray-500 font-montserrat mt-0.5 leading-relaxed">
+                      {option.timeEstimate}
+                    </span>
+                  </div>
+                  {/* Charge badge — flex-shrink-0 prevents overflow */}
                   <span className={`
-                    flex-shrink-0 text-xs font-semibold font-montserrat px-2 py-0.5 rounded
+                    flex-shrink-0 text-[11px] font-bold font-montserrat px-2 py-0.5 rounded-full whitespace-nowrap
                     ${charge === 0
-                      ? 'text-emerald-700 bg-emerald-50'
-                      : 'text-gray-600 bg-gray-50'
+                      ? 'text-emerald-700 bg-emerald-50 border border-emerald-100'
+                      : 'text-gray-700 bg-gray-100 border border-gray-200'
                     }
                   `}>
                     {chargeLabel}
                   </span>
-                </div>
-
-                <p className="text-[12px] text-gray-500 font-montserrat mt-1 leading-relaxed">
-                  {option.description}
-                  {option.freeNote && (
-                    <span className="text-gray-400"> {option.freeNote}</span>
-                  )}
-                </p>
-
-                <div className="flex items-center gap-1.5 mt-1.5">
-                  <Clock className="w-3 h-3 text-gray-300" strokeWidth={2} />
-                  <span className="text-[11px] text-gray-400 font-montserrat">{option.timeEstimate}</span>
                 </div>
               </div>
             </div>
@@ -245,23 +239,29 @@ const CheckoutModal = () => {
   const deliveryChargeLabel = formatDeliveryCharge(deliveryMethod, discountedSubtotal);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+    <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={closeCheckout} />
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-in fade-in duration-300"
+        onClick={closeCheckout}
+      />
 
-      {/* Modal */}
-      <div className="relative w-full max-w-2xl mx-4 max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+      {/* Modal — slides up on mobile, zooms in on desktop */}
+      <div className="relative w-full sm:max-w-2xl sm:mx-4 max-h-[92vh] sm:max-h-[90vh] bg-white rounded-t-2xl sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-in fade-in zoom-in duration-300 sm:slide-in-from-bottom-0 slide-in-from-bottom-4">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-white">
-          <h2 className="font-rubik font-bold text-xl text-gray-800">Checkout</h2>
-          <button onClick={closeCheckout} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+        <div className="px-5 sm:px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-white flex-shrink-0">
+          <h2 className="font-rubik font-bold text-lg sm:text-xl text-gray-800">Checkout</h2>
+          <button
+            onClick={closeCheckout}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors active:scale-90"
+          >
             <X className="w-5 h-5 text-gray-500" />
           </button>
         </div>
 
         {/* Scrollable content */}
-        <div className="flex-1 overflow-y-auto">
-          <form onSubmit={handleSubmit} className="p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto overscroll-contain">
+          <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-5 sm:space-y-6">
 
             {/* Error */}
             {error && (
@@ -273,11 +273,13 @@ const CheckoutModal = () => {
             {/* Order Summary */}
             <div>
               <h3 className="font-rubik font-semibold text-gray-800 mb-3">Order Summary</h3>
-              <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+              <div className="bg-gray-50 rounded-xl p-3 sm:p-4 space-y-2">
                 {cartItems.map((item) => (
-                  <div key={`${item.id}-${item.weight}`} className="flex justify-between text-sm font-montserrat">
-                    <span className="text-gray-600">{item.name} ({item.weight}) x {item.quantity}</span>
-                    <span className="text-gray-800 font-medium">₹{item.price * item.quantity}</span>
+                  <div key={`${item.id}-${item.weight}`} className="flex justify-between items-start gap-3 text-sm font-montserrat">
+                    <span className="text-gray-600 leading-snug min-w-0 flex-1">
+                      {item.name} <span className="text-gray-400">({item.weight})</span> × {item.quantity}
+                    </span>
+                    <span className="text-gray-800 font-medium flex-shrink-0">₹{item.price * item.quantity}</span>
                   </div>
                 ))}
               </div>
@@ -434,7 +436,7 @@ const CheckoutModal = () => {
             <button
               type="submit"
               disabled={loading || cartItems.length === 0}
-              className="w-full py-4 bg-[#7B0D1E] text-white font-semibold rounded-xl hover:bg-[#5a0010] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-montserrat shadow-lg shadow-[#7B0D1E]/20"
+              className="w-full py-4 bg-[#7B0D1E] text-white font-semibold rounded-xl hover:bg-[#5a0010] active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-montserrat shadow-lg shadow-[#7B0D1E]/20"
             >
               {loading ? (
                 <><Loader2 className="w-5 h-5 animate-spin" /> Processing...</>
@@ -443,7 +445,7 @@ const CheckoutModal = () => {
               )}
             </button>
 
-            <p className="text-center text-xs text-gray-400 font-montserrat">
+            <p className="text-center text-xs text-gray-400 font-montserrat pb-2">
               Secure payment powered by Razorpay
             </p>
           </form>

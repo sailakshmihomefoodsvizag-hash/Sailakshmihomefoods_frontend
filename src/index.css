@@ -6,6 +6,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
   }
   
   html, body, #root {
@@ -14,6 +15,9 @@
   
   body {
     @apply font-montserrat text-gray-800 antialiased;
+    /* Prevent text size adjust on mobile orientation change */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
   
   /* Fixed background that works on mobile */
@@ -34,6 +38,12 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-rubik font-bold;
   }
+
+  /* Better touch targets for interactive elements */
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
 }
 
 /* Custom component styles */
@@ -41,13 +51,15 @@
   .btn-primary {
     @apply bg-primary text-white font-semibold py-2 px-6 rounded-xl 
            hover:bg-primary-dark transition-all duration-300 
-           shadow-soft hover:shadow-soft-lg transform hover:-translate-y-0.5;
+           shadow-soft hover:shadow-soft-lg transform hover:-translate-y-0.5
+           active:scale-95;
   }
   
   .btn-secondary {
     @apply bg-secondary text-gray-800 font-semibold py-2 px-6 rounded-xl 
            hover:bg-secondary-dark transition-all duration-300 
-           shadow-soft hover:shadow-soft-lg transform hover:-translate-y-0.5;
+           shadow-soft hover:shadow-soft-lg transform hover:-translate-y-0.5
+           active:scale-95;
   }
   
   .card-hover {
@@ -88,12 +100,18 @@
   .gradient-bg {
     background: linear-gradient(180deg, oklch(90.5% 0.182 98.111) 0%, oklch(95% 0.1 98) 100%);
   }
+
+  /* Smooth overscroll for mobile drawers */
+  .overscroll-contain {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -120,31 +138,32 @@
   scrollbar-width: none;
 }
 
-/* Modal animations */
+/* ── Animations ──────────────────────────────────────────────────────────── */
+
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInFromBottom {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInFromRight {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
 }
 
 .animate-in {
   animation-duration: 300ms;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  animation-fill-mode: forwards;
+  animation-fill-mode: both;
 }
 
 .fade-in {
@@ -153,4 +172,33 @@
 
 .zoom-in {
   animation-name: zoomIn;
+}
+
+.slide-in-from-bottom-4 {
+  animation-name: slideInFromBottom;
+}
+
+.duration-300 {
+  animation-duration: 300ms;
+}
+
+/* Button press feedback */
+.active\:scale-90:active { transform: scale(0.90); }
+.active\:scale-95:active { transform: scale(0.95); }
+.active\:scale-\[0\.98\]:active { transform: scale(0.98); }
+
+/* ── Shimmer skeleton ────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ── Page transition ─────────────────────────────────────────────────────── */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: pageFadeIn 0.25s ease-out both;
 }

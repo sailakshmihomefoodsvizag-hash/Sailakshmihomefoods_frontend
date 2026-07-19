@@ -50,10 +50,10 @@ const FoodCard = ({ product: baseProduct }) => {
   return (
     <Link
       to={`/product/${product.id}`}
-      className="group block bg-white rounded-2xl lg:rounded-3xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 relative"
+      className="group block bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-300 relative"
     >
       {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden">
+      <div className="relative overflow-hidden" style={{ aspectRatio: '1 / 1' }}>
         <OptimizedImage
           src={product.image}
           alt={product.name}
@@ -72,7 +72,7 @@ const FoodCard = ({ product: baseProduct }) => {
         {/* Out of Stock Overlay */}
         {isOutOfStock && (
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold font-montserrat text-sm shadow-lg">
+            <div className="bg-red-600 text-white px-2.5 py-1 rounded-md font-bold font-montserrat text-[10px] sm:text-xs shadow-lg">
               OUT OF STOCK
             </div>
           </div>
@@ -80,7 +80,7 @@ const FoodCard = ({ product: baseProduct }) => {
 
         {/* Discount Badge */}
         {discount > 0 && !isOutOfStock && (
-          <div className="absolute top-0 left-0 px-3 py-1.5 bg-secondary text-gray-800 text-xs font-bold rounded-br-xl font-montserrat">
+          <div className="absolute top-0 left-0 px-2 py-1 sm:px-3 sm:py-1.5 bg-secondary text-gray-800 text-[10px] sm:text-xs font-bold rounded-br-xl font-montserrat">
             {discount}% OFF
           </div>
         )}
@@ -89,7 +89,8 @@ const FoodCard = ({ product: baseProduct }) => {
         <button
           onClick={handleAddToCart}
           disabled={isOutOfStock}
-          className={`absolute bottom-3 right-3 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-soft ${
+          aria-label={isAdded ? 'Added to cart' : 'Add to cart'}
+          className={`absolute bottom-2 right-2 sm:bottom-3 sm:right-3 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 shadow-soft active:scale-90 ${
             isOutOfStock
               ? 'bg-gray-400 text-gray-200 cursor-not-allowed'
               : isAdded
@@ -97,14 +98,17 @@ const FoodCard = ({ product: baseProduct }) => {
               : 'bg-primary text-white hover:bg-primary-dark'
           }`}
         >
-          {isAdded ? <Check className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+          {isAdded
+            ? <Check className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+            : <Plus className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+          }
         </button>
       </div>
 
       {/* Content */}
-      <div className="p-4 lg:p-5">
+      <div className="p-2.5 sm:p-3 lg:p-4">
         <h3
-          className={`font-rubik font-semibold mb-2 line-clamp-1 transition-colors duration-200 ${
+          className={`font-rubik font-semibold text-xs sm:text-sm lg:text-base mb-1 sm:mb-1.5 line-clamp-1 transition-colors duration-200 ${
             isOutOfStock ? 'text-gray-500' : 'text-gray-800 group-hover:text-primary'
           }`}
         >
@@ -112,21 +116,21 @@ const FoodCard = ({ product: baseProduct }) => {
         </h3>
 
         {isOutOfStock ? (
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-red-600 font-montserrat">
+          <div className="flex items-center gap-1.5">
+            <span className="text-xs font-medium text-red-600 font-montserrat">
               Out of Stock
             </span>
-            <span className="text-sm text-gray-400 line-through font-montserrat">
+            <span className="text-xs text-gray-400 line-through font-montserrat">
               ₹{product.price}
             </span>
           </div>
         ) : (
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-gray-800 font-rubik">
+          <div className="flex items-baseline gap-1.5 flex-wrap">
+            <span className="text-sm sm:text-base lg:text-lg font-bold text-gray-800 font-rubik leading-tight">
               ₹{product.price}
             </span>
             {product.originalPrice > product.price && (
-              <span className="text-sm text-gray-400 line-through font-montserrat">
+              <span className="text-[10px] sm:text-xs text-gray-400 line-through font-montserrat">
                 ₹{product.originalPrice}
               </span>
             )}

@@ -21,7 +21,7 @@ const YouMayAlsoLikeFallback = () => (
       <h2 className="font-rubik font-bold text-[28px] sm:text-[32px] lg:text-[33px] text-primary mb-6 sm:mb-8">
         You May Also Like
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         {Array.from({ length: 4 }).map((_, i) => (
           <SkeletonCard key={`ymal-fallback-${i}`} />
         ))}

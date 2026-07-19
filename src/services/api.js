@@ -116,8 +116,8 @@ export const productAPI = {
     return apiRequest(`/products/best-sellers${query}`, { method: 'GET' });
   },
 
-  getYouMayAlsoLike: async ({ limit = 4, excludeId, category } = {}) => {
-    const query = buildQueryParams({ limit, excludeId, category });
+  getYouMayAlsoLike: async ({ limit = 4, excludeId, category, randomize } = {}) => {
+    const query = buildQueryParams({ limit, excludeId, category, randomize: randomize ? 'true' : undefined });
     return apiRequest(`/products/you-may-also-like${query}`, { method: 'GET' });
   },
 

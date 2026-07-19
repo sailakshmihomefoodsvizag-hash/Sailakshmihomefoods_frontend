@@ -1,6 +1,5 @@
 import { useMemo, useRef } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import ProductSlider from './ProductSlider';
 import ProductCard from './ProductCard';
 import SkeletonCard from './SkeletonCard';
 import { productAPI } from '../services/api.js';
@@ -68,7 +67,7 @@ const BestSellers = () => {
         </h2>
 
         {showSkeleton ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {Array.from({ length: PAGE_SIZE }).map((_, index) => (
               <SkeletonCard key={`best-sellers-skeleton-${index}`} />
             ))}
@@ -79,13 +78,17 @@ const BestSellers = () => {
           </div>
         ) : (
           <>
-            <ProductSlider products={products} CardComponent={ProductCard} />
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
             {hasNextPage && (
               <div className="flex justify-center mt-6">
                 <button
                   onClick={() => fetchNextPage()}
                   disabled={isFetchingNextPage}
-                  className="px-5 py-2.5 rounded-xl bg-primary text-white font-montserrat text-sm hover:bg-primary-dark disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                  className="px-5 py-2.5 rounded-xl bg-primary text-white font-montserrat text-sm hover:bg-primary-dark active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200"
                 >
                   {isFetchingNextPage ? 'Loading...' : 'Load More'}
                 </button>

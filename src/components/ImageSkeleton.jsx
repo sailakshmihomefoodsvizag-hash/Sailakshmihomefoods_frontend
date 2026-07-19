@@ -67,20 +67,17 @@ ImageSkeleton.propTypes = {
  */
 export const ProductCardSkeleton = ({ className = '' }) => {
   return (
-    <div className={`bg-white rounded-2xl lg:rounded-3xl overflow-hidden shadow-soft ${className}`}>
+    <div className={`bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-soft ${className}`}>
       {/* Image skeleton */}
       <ImageSkeleton aspectRatio="square" variant="card" className="rounded-none" />
       
       {/* Content skeleton */}
-      <div className="p-4 lg:p-5 space-y-3">
+      <div className="p-2.5 sm:p-3 lg:p-4 space-y-2">
         {/* Title skeleton */}
-        <div className="h-5 bg-gray-200 rounded animate-pulse w-3/4" />
+        <div className="h-3.5 sm:h-4 bg-gray-200 rounded animate-pulse w-3/4" />
         
         {/* Price skeleton */}
-        <div className="flex items-center gap-2">
-          <div className="h-6 bg-gray-200 rounded animate-pulse w-20" />
-          <div className="h-4 bg-gray-200 rounded animate-pulse w-16" />
-        </div>
+        <div className="h-3.5 sm:h-4 bg-gray-200 rounded animate-pulse w-1/2" />
       </div>
     </div>
   );
@@ -97,7 +94,7 @@ ProductCardSkeleton.propTypes = {
  */
 export const ProductGridSkeleton = ({ count = 8, className = '' }) => {
   return (
-    <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 ${className}`}>
+    <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 ${className}`}>
       {Array.from({ length: count }).map((_, index) => (
         <ProductCardSkeleton key={index} />
       ))}

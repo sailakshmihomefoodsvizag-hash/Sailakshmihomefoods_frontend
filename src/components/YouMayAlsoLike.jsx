@@ -17,6 +17,9 @@ const YouMayAlsoLike = ({ currentProductId, currentCategory } = {}) => {
     once: true,
   });
 
+  // When no specific product is provided (home page), randomize results
+  const isHomePage = !currentProductId;
+
   const {
     data,
     isPending,
@@ -24,13 +27,15 @@ const YouMayAlsoLike = ({ currentProductId, currentCategory } = {}) => {
   } = useQuery({
     queryKey: ['products', 'you-may-also-like', PAGE_SIZE, currentProductId, currentCategory],
     enabled: isVisible,
-    staleTime: 2 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
+    // Short stale time on home page so each visit can show different products
+    staleTime: isHomePage ? 0 : 2 * 60 * 1000,
+    gcTime: isHomePage ? 30 * 1000 : 10 * 60 * 1000,
     queryFn: async () => {
       const response = await productAPI.getYouMayAlsoLike({
         limit: PAGE_SIZE,
         excludeId: currentProductId,
         category: currentCategory,
+        randomize: isHomePage,
       });
       if (!response?.success) {
         throw new Error(response?.message || 'Failed to load recommendations');
@@ -56,7 +61,7 @@ const YouMayAlsoLike = ({ currentProductId, currentCategory } = {}) => {
         </h2>
 
         {showSkeleton ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {Array.from({ length: PAGE_SIZE }).map((_, index) => (
               <SkeletonCard key={`you-may-like-skeleton-${index}`} />
             ))}
@@ -66,7 +71,11 @@ const YouMayAlsoLike = ({ currentProductId, currentCategory } = {}) => {
             Unable to load recommendations right now.
           </div>
         ) : (
-          <ProductSlider products={products} CardComponent={ProductCard} />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         )}
       </div>
     </section>
