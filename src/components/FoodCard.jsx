@@ -47,6 +47,11 @@ const FoodCard = ({ product: baseProduct }) => {
     setTimeout(() => setIsAdded(false), 2000);
   };
 
+  // Podis: show both 100g and 1kg prices
+  const isPodi = product.category?.toLowerCase() === 'podis';
+  // 100g = 10% of pricePerKg, rounded to nearest rupee
+  const price100g = Math.round(product.pricePerKg * 0.1);
+
   return (
     <Link
       to={`/product/${product.id}`}
@@ -123,6 +128,22 @@ const FoodCard = ({ product: baseProduct }) => {
             <span className="text-xs text-gray-400 line-through font-montserrat">
               ₹{product.price}
             </span>
+          </div>
+        ) : isPodi ? (
+          /* Podis: show 100g price + 1kg price */
+          <div className="space-y-0.5">
+            <div className="flex items-baseline gap-1">
+              <span className="text-[10px] sm:text-xs text-gray-500 font-montserrat">100g</span>
+              <span className="text-xs sm:text-sm font-bold text-gray-800 font-rubik leading-tight">
+                ₹{price100g}
+              </span>
+            </div>
+            <div className="flex items-baseline gap-1">
+              <span className="text-[10px] sm:text-xs text-gray-500 font-montserrat">1kg</span>
+              <span className="text-xs sm:text-sm font-bold text-gray-800 font-rubik leading-tight">
+                ₹{product.pricePerKg}
+              </span>
+            </div>
           </div>
         ) : (
           <div className="flex items-baseline gap-1.5 flex-wrap">

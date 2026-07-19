@@ -34,7 +34,6 @@ const BestSellers = () => {
       if (!response?.success) {
         throw new Error(response?.message || 'Failed to load best sellers');
       }
-
       return {
         ...response,
         products: (response.products || []).map(mergeProductWithImages),
@@ -54,22 +53,24 @@ const BestSellers = () => {
 
   const showSkeleton = !isVisible || (isPending && products.length === 0);
 
-  // Hide section if no products and not loading
   if (!showSkeleton && !isError && products.length === 0) {
     return null;
   }
 
   return (
-    <section id="bestsellers" ref={sectionRef} className="py-10 sm:py-14 lg:py-16">
+    <section id="bestsellers" ref={sectionRef} className="py-10 sm:py-14 lg:py-16 overflow-hidden">
+      {/* Outer wrapper matches the Collections section container exactly */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-rubik font-bold text-[28px] sm:text-[32px] lg:text-[33px] text-primary mb-6 sm:mb-8">
           Our Best Sellers
         </h2>
 
         {showSkeleton ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
-            {Array.from({ length: PAGE_SIZE }).map((_, index) => (
-              <SkeletonCard key={`best-sellers-skeleton-${index}`} />
+          <div className="flex gap-3 sm:gap-4 overflow-hidden pb-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="flex-shrink-0 w-[47vw] sm:w-56 lg:w-64">
+                <SkeletonCard />
+              </div>
             ))}
           </div>
         ) : isError ? (
@@ -78,13 +79,37 @@ const BestSellers = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+            {/*
+              Scroll container mirrors CollectionSlider exactly:
+              - px-4 on the scroll div itself (same as CollectionSlider)
+              - overflow-hidden on the section clips the bleed
+              - snap-x snap-mandatory + snap-center on each item
+              - cursor-grab matches CollectionSlider
+              - On lg+: switch to a standard grid
+            */}
+            <div
+              className="
+                flex gap-4 sm:gap-6
+                overflow-x-auto hide-scrollbar
+                pb-6 pt-4 px-4
+                scroll-smooth snap-x snap-mandatory
+                cursor-grab active:cursor-grabbing
+                lg:grid lg:grid-cols-4 lg:overflow-visible lg:snap-none
+                lg:gap-6 lg:pb-0 lg:pt-0 lg:px-0 lg:cursor-auto
+              "
+            >
               {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <div
+                  key={product.id}
+                  className="flex-shrink-0 snap-center w-[200px] sm:w-[240px] lg:w-auto lg:flex-shrink lg:snap-none"
+                >
+                  <ProductCard product={product} />
+                </div>
               ))}
             </div>
+
             {hasNextPage && (
-              <div className="flex justify-center mt-6">
+              <div className="flex justify-center mt-4">
                 <button
                   onClick={() => fetchNextPage()}
                   disabled={isFetchingNextPage}
