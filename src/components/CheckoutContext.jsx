@@ -283,7 +283,7 @@ export const CheckoutProvider = ({ children }) => {
         amount:      data.order.amount,
         currency:    data.order.currency || 'INR',
         name:        'Sai Lakshmi Home Foods',
-        description: `Order #${data.order.orderId}`,
+        description: 'Order Payment',
         order_id:    data.order.id,
 
         handler: async (rzpResponse) => {
@@ -309,9 +309,11 @@ export const CheckoutProvider = ({ children }) => {
 
         modal: {
           ondismiss: () => {
+            // Payment cancelled — no order was created, cart is safe
             activeRzpOrderRef.current = null;
             setLoading(false);
-            setError('Payment was cancelled. Your cart is safe — try again when ready.');
+            // No error shown — user intentionally closed the modal
+            // They can simply click Pay Now again
           },
           confirm_close:  true,
           escape:         false,
@@ -325,9 +327,9 @@ export const CheckoutProvider = ({ children }) => {
       rzp.on('payment.failed', (response) => {
         const reason = response?.error?.description
           || response?.error?.reason
-          || 'Payment failed';
+          || 'Payment was not completed';
         activeRzpOrderRef.current = null;
-        setError(`${reason}. Please try a different payment method.`);
+        setError(`${reason}. Please try again with a different payment method.`);
         setLoading(false);
       });
 
