@@ -112,13 +112,20 @@ const AddProductModal = ({ onClose, onCreated }) => {
 
           {/* Price */}
           <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1">Price per kg (₹) *</label>
+            <label className="block text-xs font-medium text-gray-600 mb-1">
+              Price per kg (₹) *
+              {form.category === 'Podis' && (
+                <span className="ml-1 text-amber-700 font-normal">
+                  — customer will see {form.pricePerKg ? `₹${Math.floor(parseInt(form.pricePerKg, 10) * 0.1)}` : '10%'} per 100g
+                </span>
+              )}
+            </label>
             <input
               type="number"
               value={form.pricePerKg}
               onChange={(e) => setForm({ ...form, pricePerKg: e.target.value })}
               className="w-full h-10 px-3 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#7B0D1E] outline-none"
-              placeholder="e.g. 750"
+              placeholder={form.category === 'Podis' ? 'e.g. 1200 (customer sees ₹120 per 100g)' : 'e.g. 750'}
               min="1"
             />
           </div>
@@ -301,10 +308,18 @@ const ProductCard = ({
             </div>
           ) : (
             <div className="flex items-center justify-between w-full">
-              <p className="text-sm font-bold text-[#7B0D1E]">
-                {fmt(product.pricePerKg)}
-                <span className="text-xs font-normal text-gray-400"> /kg</span>
-              </p>
+              <div>
+                <p className="text-sm font-bold text-[#7B0D1E]">
+                  {fmt(product.pricePerKg)}
+                  <span className="text-xs font-normal text-gray-400"> /kg</span>
+                </p>
+                {product.category === 'Podis' && (
+                  <p className="text-xs text-amber-700 font-medium mt-0.5">
+                    Customer sees: {fmt(Math.floor(product.pricePerKg * 0.1))}
+                    <span className="font-normal text-gray-400"> /100g</span>
+                  </p>
+                )}
+              </div>
               <button onClick={() => onEditPrice(product.id, product.pricePerKg)}
                 className="p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded transition-colors">
                 <Pencil className="w-3.5 h-3.5" />

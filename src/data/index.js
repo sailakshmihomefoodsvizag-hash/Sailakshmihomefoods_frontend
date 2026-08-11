@@ -27,16 +27,28 @@ export {
 // PRICING UTILITY FUNCTIONS
 // ============================================
 
-// Calculate weight prices from 1kg base price
-export const calculateWeightPrices = (pricePerKg) => ({
-  '250gm': Math.floor(pricePerKg * 0.25),
-  '500gm': Math.floor(pricePerKg * 0.5),
-  '1kg': pricePerKg,
-  '2kg': pricePerKg * 2,
-});
+/**
+ * Calculate weight prices from 1kg base price.
+ * For Podis: only 100g option (10% of pricePerKg).
+ * For all other categories: standard 250gm / 500gm / 1kg / 2kg.
+ */
+export const calculateWeightPrices = (pricePerKg, category) => {
+  if (category?.toLowerCase() === 'podis') {
+    return { '100g': Math.floor(pricePerKg * 0.1) };
+  }
+  return {
+    '250gm': Math.floor(pricePerKg * 0.25),
+    '500gm': Math.floor(pricePerKg * 0.5),
+    '1kg':   pricePerKg,
+    '2kg':   pricePerKg * 2,
+  };
+};
 
-// Standard weights for products
+// Standard weights for non-Podis products
 export const STANDARD_WEIGHTS = ['250gm', '500gm', '1kg', '2kg'];
+
+// Podis weight — sold in 100g only
+export const PODIS_WEIGHTS = ['100g'];
 
 // ============================================
 // CATEGORIES DATA

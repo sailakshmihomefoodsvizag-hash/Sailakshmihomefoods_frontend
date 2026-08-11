@@ -47,10 +47,8 @@ const FoodCard = ({ product: baseProduct }) => {
     setTimeout(() => setIsAdded(false), 2000);
   };
 
-  // Podis: show both 100g and 1kg prices
+  // Podis: product.price is already the 100g price (set server-side)
   const isPodi = product.category?.toLowerCase() === 'podis';
-  // 100g = 10% of pricePerKg, rounded to nearest rupee
-  const price100g = Math.round(product.pricePerKg * 0.1);
 
   return (
     <Link
@@ -130,20 +128,12 @@ const FoodCard = ({ product: baseProduct }) => {
             </span>
           </div>
         ) : isPodi ? (
-          /* Podis: show 100g price + 1kg price */
-          <div className="space-y-0.5">
-            <div className="flex items-baseline gap-1">
-              <span className="text-[10px] sm:text-xs text-gray-500 font-montserrat">100g</span>
-              <span className="text-xs sm:text-sm font-bold text-gray-800 font-rubik leading-tight">
-                ₹{price100g}
-              </span>
-            </div>
-            <div className="flex items-baseline gap-1">
-              <span className="text-[10px] sm:text-xs text-gray-500 font-montserrat">1kg</span>
-              <span className="text-xs sm:text-sm font-bold text-gray-800 font-rubik leading-tight">
-                ₹{product.pricePerKg}
-              </span>
-            </div>
+          /* Podis: sold in 100g only — product.price IS the 100g price */
+          <div className="flex items-baseline gap-1">
+            <span className="text-sm sm:text-base lg:text-lg font-bold text-gray-800 font-rubik leading-tight">
+              ₹{product.price}
+            </span>
+            <span className="text-[10px] sm:text-xs text-gray-500 font-montserrat">/100g</span>
           </div>
         ) : (
           <div className="flex items-baseline gap-1.5 flex-wrap">

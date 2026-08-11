@@ -224,12 +224,15 @@ const Product = () => {
                 <span className="font-rubik font-bold text-3xl text-gray-800">
                   ₹{currentPrice}
                 </span>
+                {product.category === 'Podis' && (
+                  <span className="text-base text-gray-500 font-montserrat">per 100g</span>
+                )}
               </div>
 
               {/* Weight Options */}
               <div className="space-y-3">
                 <label className="font-rubik font-semibold text-gray-800">
-                  Select Weight
+                  {product.category === 'Podis' ? 'Pack Size' : 'Select Weight'}
                 </label>
                 <div className="flex flex-wrap gap-3">
                   {product.weights?.map((weight) => (
